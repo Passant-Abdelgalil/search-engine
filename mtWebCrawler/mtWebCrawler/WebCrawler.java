@@ -123,6 +123,7 @@ public class WebCrawler implements Runnable {
         file.WriteToFile(first_link);
 
         crawl(startLine);
+        
 
     }
 
