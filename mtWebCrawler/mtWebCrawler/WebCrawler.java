@@ -27,7 +27,7 @@ class FileFilling {
     static File myObj;
     static FileWriter myWriter;
 
-    static void fileCreating() {
+    static void fileCreating() { 
         try {
             myObj = new File("filename.txt");
             if (myObj.createNewFile()) {
@@ -41,7 +41,7 @@ class FileFilling {
         }
     }
 
-    static void fileWriterCreation() {
+    static void fileWriterCreation() {  //quikfix made me make it static
         try {
             myWriter = new FileWriter("filename.txt");
             // myWriter.write(URL);
@@ -101,14 +101,10 @@ public class WebCrawler implements Runnable {
     FileFilling file = new FileFilling();
 
     public WebCrawler(String link, int num, int startLine) {
-        System.out.print("WebCrawler reated");
+        System.out.print("WebCrawler created");
         first_link = link;
         ID = num;
         this.startLine = startLine;
-
-        synchronized (this.file) {
-            file.WriteToFile(first_link);
-        }
 
         thread = new Thread(this);
         thread.start();
@@ -123,15 +119,18 @@ public class WebCrawler implements Runnable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        file.WriteToFile(first_link);
+
         crawl(startLine);
 
     }
 
-    private void crawl(int LineinFile) { // level init =1 LineinFile init=1
+    private void crawl(int lineInFile) { // level init =1 LineinFile init=1
 
         if (file.level <= MAX_DEPTH) { // untill we have 5000 link
             System.out.println("want to read");
-            String URL = file.ReadFromFile(LineinFile);
+            String URL = file.ReadFromFile(lineInFile);
             if (URL == "")
                 System.out.println("didn't read");
 
