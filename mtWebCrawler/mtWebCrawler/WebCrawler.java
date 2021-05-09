@@ -92,7 +92,7 @@ class FileFilling {
 
 public class WebCrawler implements Runnable {
 
-    private static final int MAX_DEPTH = 3;
+    private static final int MAX_DEPTH = 5000;
     private Thread thread;
     private String first_link;
     private int ID;
@@ -123,7 +123,7 @@ public class WebCrawler implements Runnable {
         file.WriteToFile(first_link);
 
         crawl(startLine);
-        
+
 
     }
 
