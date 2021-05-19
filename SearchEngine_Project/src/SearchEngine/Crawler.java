@@ -5,13 +5,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
+import java.net.URL;
 
 class FileFilling {
 
@@ -19,7 +22,7 @@ class FileFilling {
     // n7ot impl. el crawl f class? wlla class
     // FileFilling
 
-    int level;
+    int level = 2;
     int lineInFile = 0;
     static File myObj;
     static FileWriter myWriter;
@@ -38,20 +41,11 @@ class FileFilling {
         }
     }
 
-    static void fileWriterCreation() {  //quick fix made me make it static
-        try {
-            myWriter = new FileWriter("filename.txt", true);
-        } catch (Exception e) {
-            System.out.println("An error occurred when Write to file.");
-            System.out.println(e.getMessage());
-        }
-    }
-
     synchronized void WriteToFile(String URL) {
         try {
             myWriter = new FileWriter("filename.txt", true);
             myWriter.write(URL + "\n");
-            System.out.println(URL);
+            System.out.println(Thread.currentThread().getName()+": "+URL);
 
         } catch (Exception e) {
             System.out.println("An error occurred when Write to file.");
@@ -65,24 +59,16 @@ class FileFilling {
         }
     }
 
-    static void fileClosing() {
-        try {
-            myWriter.close();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            System.out.println(e.getMessage());
-        }
-    }
 
     synchronized String ReadFromFile(int n) {
         try {
             Stream<String> lines = Files.lines(Paths.get("filename.txt"));
-            String url = lines.skip(n).findFirst().get();
-            if (!url.equals("")) {
-                System.out.println(url);
-            } else {
-                System.out.println("not present");
+            String url = lines.skip(n).findFirst().orElse("");
+            //System.out.println(Thread.currentThread().getName() + ": " + url);
+            if (url.equals("")) {
+                System.out.println("no url in the file");
             }
+            lines.close();
             return url;
         } catch (Exception e) {
             System.out.println("An error when Read from file. " + e.getMessage());
@@ -106,7 +92,8 @@ public class Crawler implements Runnable {
     private int ID;
     private ArrayList<String> VisitedLinks = new ArrayList<>();
     private RobotChecker robotChecker;
-    FileFilling file;
+    final FileFilling file;
+
     public Crawler(RobotChecker checker, FileFilling fileFill, int id) {
         System.out.printf("Crawler with ID = %d just created!\n ", id);
         this.ID = id;
@@ -123,47 +110,60 @@ public class Crawler implements Runnable {
             // TODO Auto-generated catch block
             System.out.println(e.getMessage());
         }
-        //file.WriteToFile(first_link);
         crawl();
     }
 
     private synchronized void crawl() { // level init =1 lineInFile init=1
         if (file.level <= MAX_DEPTH) { // until we have 5000 link
-            System.out.println("Reading...");
-            String URL;
+            String url;
+            Document doc = null;
             synchronized (this.file) {
-                URL = file.ReadFromFile(this.file.lineInFile);
+                url = file.ReadFromFile(this.file.lineInFile);
                 file.lineInFileIncrement();
-                System.out.println(Thread.currentThread().getName() + " started with URL: " + URL);
             }
-            if (URL.equals(""))
+            if (url.equals("")) {
                 System.out.println("Empty line!");
+                return;
+            }
+            System.out.println(Thread.currentThread().getName() + ": " + url);
+            try {
+                URLConnection uConn = new URL(url).openConnection();
+                String contentType = uConn.getHeaderField("Content-Type");
+                if (contentType.equals("text/html; charset=utf-8") || contentType.equals("text/html")) {
+                    doc = request(url);
+                    System.out.println("HTML");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 
-            Document doc = request(URL);
             if (doc != null) {
                 for (Element link : doc.select("a[href]")) {
                     String next_link = link.absUrl("href");
                     try {
                         robotChecker.getRules(next_link);
                     } catch (Exception e) {
-                        System.out.println("Error while checking robots.txt!");
-                        System.out.println(e.getMessage());
+                        System.out.println("Error while checking robots.txt! " + e.getMessage());
+                        continue;
                     }
                     synchronized (this.file) {
                         if (!file.visitedLinks.contains(next_link) && robotChecker.isAllowed(next_link)) {
                             file.WriteToFile(next_link);
+                            this.file.level++;
                             file.levelIncrement();
                             file.visitedLinks.add(next_link);
                         }
                     }
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        System.out.println(Thread.currentThread().getName() + "is awaken");
+                    }
                 }
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    System.out.println(Thread.currentThread().getName() + "is awaken");
-                }
-                crawl();
+
+
             }
+            crawl();
         }
 
     }
@@ -189,7 +189,6 @@ public class Crawler implements Runnable {
         }
 
     }
-
 
 
 }
