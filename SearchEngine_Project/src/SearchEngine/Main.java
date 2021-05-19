@@ -7,9 +7,9 @@ class SearchEngine {
         RobotChecker checker = new RobotChecker();
         FileFilling file = new FileFilling();
         FileFilling.fileCreating();
-        FileFilling.fileWriterCreation();
         // should be a USER INPUT
         int numOfThreads = 2;
+
         Thread[] crawlerThreads = new Thread[numOfThreads];
 
         for (int i = 0; i < numOfThreads; i++) {
@@ -20,6 +20,5 @@ class SearchEngine {
         for (int i = 0; i < numOfThreads; i++) {
             crawlerThreads[i].join();
         }
-        FileFilling.fileClosing();
     }
 }
