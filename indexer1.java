@@ -1,10 +1,31 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import java.util.ArrayList;
 import java.io.*;
 
 public class indexer1 {
+    private static ArrayList<String> IgWords= new ArrayList<String>();
+    
+    private static void ReadFromFile() {
+        LineNumberReader reader =null;
+        try {
+        reader = new LineNumberReader(new FileReader(new File("ignoredWords.txt")));
+        String str;
+        while ((str=reader.readLine()) != null) //read file till the end
+        {
+            IgWords.add(str);
+        }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            reader.close();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+    }
 
-    private static Boolean ReadFromFile(String word) {//take care! I'm ignored!
+    /*private static Boolean ReadFromFile(String word) {//take care! I'm ignored!
         LineNumberReader reader =null;
         try {
             reader = new LineNumberReader(new FileReader(new File("ignoredWords.txt")));
@@ -35,13 +56,13 @@ public class indexer1 {
             }
         }
         return true;
-    }
+    }*/
     public static void main(String[] args) throws IOException {
         
 
         File input = new File ("input.html");//file having all HTML documents
         Document doc = Jsoup.parse(input, "UTF-8");
-        
+        ReadFromFile();
         String htmlUrls= doc.getElementsByTag("body").get(0).text();
         String[] htmlUrlsSplitted = htmlUrls.split(" ");//has URLs
 
@@ -69,9 +90,9 @@ public class indexer1 {
                     
             }
             for (String wordInSentence : sentenceWords) {
-                Boolean IsignoredWord= ReadFromFile(wordInSentence.toLowerCase());//don't take the ignored words
+                //Boolean IsignoredWord= ReadFromFile(wordInSentence.toLowerCase());//don't take the ignored words
                 
-                if ( IsignoredWord ) 
+                if ( IgWords.contains(wordInSentence) ) 
                     System.out.println(wordInSentence);
             }
             System.out.println("------------------");
