@@ -134,12 +134,14 @@ public class Crawler implements Runnable {
                     System.out.println("HTML");
                 }
             } catch (Exception e) {
+                System.out.println("HERE");
                 System.out.println(e.getMessage());
             }
 
             if (doc != null) {
                 for (Element link : doc.select("a[href]")) {
                     String next_link = link.absUrl("href");
+                    System.out.println(next_link);
                     try {
                         robotChecker.getRules(next_link);
                     } catch (Exception e) {

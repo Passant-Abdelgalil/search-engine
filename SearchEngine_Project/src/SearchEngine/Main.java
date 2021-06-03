@@ -8,7 +8,7 @@ class SearchEngine {
         FileFilling file = new FileFilling();
         FileFilling.fileCreating();
         // should be a USER INPUT
-        int numOfThreads = 2;
+        int numOfThreads = 1;
 
         Thread[] crawlerThreads = new Thread[numOfThreads];
 
@@ -19,6 +19,11 @@ class SearchEngine {
 
         for (int i = 0; i < numOfThreads; i++) {
             crawlerThreads[i].join();
+
         }
+/*
+        RobotChecker.checkEncoding("https://yoast.com/search-operators/");
+        RobotChecker.checkEncoding("https://yoast.com/search-operators/1");
+*/
     }
 }

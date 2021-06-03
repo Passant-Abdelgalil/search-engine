@@ -1,13 +1,19 @@
 package SearchEngine;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,6 +22,7 @@ import java.util.regex.Matcher;
 
 
 public class RobotChecker {
+    private HashMap<String, HostData> robotRules;
 
     static class HostData {
         boolean checked;
@@ -27,40 +34,64 @@ public class RobotChecker {
         }
     }
 
-    private HashMap<String, HostData> robotRules;
+
 
     public RobotChecker() {
         robotRules = new HashMap<String, HostData>();
     }
 
-    public boolean isChecked(String host) {
+    public boolean isChecked(byte[] parsedHTML) {
         try {
-            return robotRules.get(host).checked;
+            return robotRules.get(parsedHTML).checked;
         } catch (Exception e) {
             return false;
         }
 
     }
+    static boolean checkEncoding(String Url){
+        try {
+            Document document = Jsoup.connect(Url).get();
+            String parsedURL = document.toString();
+            //System.out.println(parsedURL);
+            byte[] htmlBody = parsedURL.getBytes("UTF-8");
+            System.out.println(htmlBody);
+            MessageDigest messageDigest= MessageDigest.getInstance("SHA-256");
+            System.out.println(Arrays.toString(messageDigest.digest(htmlBody)));
+
+        } catch (IOException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
 
     public void getRules(String seed) throws IOException {
+        String hostName = "";String protocol = "";URL url= null;
 
-        if (isChecked(seed)) return;
+
+        //if (isChecked()) return;
 
         // generate the url for robots.txt
-
-        URL url = new URL(seed);
-        String hostName = url.getHost(); // stackoverflow.com
+        try {
+        url = new URL(seed);
+        hostName = url.getHost(); // stackoverflow.com
         hostName = hostName.replace("www.", "");
 
-        String protocol = url.getProtocol(); // https: http
-
-        try {
-            url = new URL(protocol + "://" + hostName + "/robots.txt");
+        protocol = url.getProtocol(); // https: http
+ url = new URL(protocol + "://" + hostName + "/robots.txt");
         } catch (Exception e) {
+            System.out.println(url);
+            System.out.println("Host name is: " + hostName);
+            System.out.println("Protocol is: " + protocol);
             System.out.println(e.getMessage());
             return;
         }
-        Reader streamReader = connect(url);
+        Reader streamReader = null;
+        try {
+            streamReader = connect(url);
+        } catch (IOException e) {
+            streamReader = null;
+        }
 
         if (streamReader != null) {
 
