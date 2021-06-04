@@ -1,4 +1,4 @@
-package Lab4;
+package Crawler;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -8,21 +8,13 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
-/*
-* 1. check visited
-* 2. if yes > crawler continue
-* 3. no, check robot.txt
-* 4. hostname: [disallowed]
-* */
+import java.util.regex.Pattern;
 
 public class RobotChecker {
-
     static class HostData {
         boolean checked;
         ArrayList<String> disAllowedURLs;
@@ -53,19 +45,19 @@ public class RobotChecker {
         if (isChecked(seed)) return;
 
         // generate the url for robots.txt
+
         URL url = new URL(seed);
         String hostName = url.getHost(); // stackoverflow.com
-        String protocol = url.getProtocol(); // https: http
         hostName = hostName.replace("www.", "");
+
+        String protocol = url.getProtocol(); // https: http
 
         try {
             url = new URL(protocol + "://" + hostName + "/robots.txt");
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
-
-
         Reader streamReader = connect(url);
 
         if (streamReader != null) {
@@ -129,9 +121,11 @@ public class RobotChecker {
 
     public boolean isAllowed(String url) {
 
-        String host = null; // get host name from the url
+        String host = ""; // get host name from the url
+        String protocol = "";
         try {
             host = new URL(url).getHost();
+            protocol = new URL(url).getProtocol();
             host = host.replace("www.", "");
         } catch (MalformedURLException e) {
             return false;
@@ -139,13 +133,31 @@ public class RobotChecker {
         if (host.equals("")) { // invalid url, couldn't extract host name >> return false
             return false;
         }
-        ArrayList<String> directories = robotRules.get(host).disAllowedURLs; // get disallowed directories for that host
-        for (String pattern : directories) {
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(url);
-            if (m.matches()) { // if the url contains a disallowed directory >> return false
+        ArrayList<String> directories = new ArrayList<>();
+        if (!robotRules.containsKey(host)) {
+            try {
+                System.out.println("Getting Rules...");
+                this.getRules(protocol+"://"+host);
+                System.out.println("Done Rules.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
                 return false;
             }
+        }
+        try {
+            directories = robotRules.get(host).disAllowedURLs;
+
+
+            for (String pattern : directories) {
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(url);
+                if (m.matches()) { // if the url contains a disallowed directory >> return false
+                    return false;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(host);
+            System.out.println(e.getMessage());
         }
         return true; // if no directory was matched >> allowed url, return true
     }
@@ -156,4 +168,9 @@ public class RobotChecker {
         return ".*" + directory + ".*"; // wrap the directory with .* to search for it anywhere in the url
     }
 
+    public static void main(String... args) {
+        RobotChecker checker = new RobotChecker();
+        checker.isAllowed("https://meta.stackoverflow.com");
+    }
 }
+
