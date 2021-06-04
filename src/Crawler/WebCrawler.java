@@ -15,9 +15,9 @@ public class WebCrawler implements Runnable {
 
     private final Thread thread;
     private final int ID;
-    private final RobotChecker robotChecker;
+    public RobotChecker robotChecker;
     boolean stopCrawling = false;
-    final BFSNeighbourList bfsQueue;
+    private BFSNeighbourList bfsQueue;
 
 
     public WebCrawler(BFSNeighbourList bfsQueue, int num, RobotChecker checker) {
@@ -37,9 +37,10 @@ public class WebCrawler implements Runnable {
 
     private void crawl() { // level init =1 LineinFile init=1
         while (true) {
+
             urlObj top = null;
             // Check the stopping criteria
-            synchronized (this) {
+            synchronized (this.bfsQueue) {
                 if (bfsQueue.count >= 5000) {   // untill we have 5000 link //&& file.count<=5000 8alat
                     stopCrawling = true;
                 } else {

@@ -24,7 +24,7 @@ public class FileFilling {
     {
         FileFilling.filename=filename;
     }
-    static boolean fileCreating() {
+    public boolean fileCreating() {
         try {
             myObj = new File(filename);
             if (myObj.createNewFile()) {
@@ -52,8 +52,9 @@ public class FileFilling {
 
     synchronized void WriteToFile(String URL) {
         try {
+            FileFilling.fileWriterCreation();
             myWriter.write(URL + "\n");
-
+            myWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred when Write to file.");
         }

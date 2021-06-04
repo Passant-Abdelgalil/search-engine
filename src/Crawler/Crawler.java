@@ -19,9 +19,8 @@ public class Crawler {
 /*        FileFilling seedfile = new FileFilling("seedsFile.txt");
         FileFilling.fileCreating();
 */
-        FileFilling urlFile = new FileFilling("/home/passant/Desktop/crawler-based-search-engine/urlsFile.txt");
-        if(FileFilling.fileCreating()){
-            FileFilling.fileWriterCreation();
+        FileFilling urlFile = new FileFilling("urlsFile.txt");
+        if(urlFile.fileCreating()){
             for(String url: seed) {
                 urlFile.WriteToFile(url);
             }
@@ -29,6 +28,7 @@ public class Crawler {
         FileFilling.fileWriterCreation();
 
         bfsQueue = new BFSNeighbourList(seed, urlFile, new URINormalizer()); //lazem da ya5od el seed
+
         //bfsQueue.bfs(bfsQueue.getQTop()); da f class el WebCrawler(one crawler (thread))
         rc = new RobotChecker();
     }
