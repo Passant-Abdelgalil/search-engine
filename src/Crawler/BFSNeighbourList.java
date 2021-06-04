@@ -78,10 +78,11 @@ public class BFSNeighbourList {
         // normalized
         String normalized = normalizer.normalizePreservedSemantics(node.url);
         normalized = normalizer.normalizeSemantics(normalized);
-        visitedLinks.add(normalized);
-        count++;
-        urlsFile.WriteToFile(node.url);
-
+        if (!visitedLinks.contains(normalized)) {
+            visitedLinks.add(normalized);
+            count++;
+            urlsFile.WriteToFile(node.url);
+        }
         List<urlObj> neighbours = node.getNeighbours();
         for (urlObj url : neighbours) {
             if (count >= 5000) break;

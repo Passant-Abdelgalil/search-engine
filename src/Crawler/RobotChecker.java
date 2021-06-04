@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -90,7 +91,8 @@ public class RobotChecker {
     }
 
     private Reader connect(URL url) throws IOException {
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+        System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         // sending the GET request to /robots.txt
         try {
@@ -102,7 +104,7 @@ public class RobotChecker {
 
         // reading the response
         int status = connection.getResponseCode();
-        if (status > 299) {
+        if (status > 399) {
             System.out.println("Request Failed!");
             return null;
         }
@@ -142,29 +144,40 @@ public class RobotChecker {
                 return false;
             }
         }
-        if (!robotRules.containsKey(host)) return false;
-        directories = robotRules.get(host).disAllowedURLs;
-
-        for (String pattern : directories) {
-            Pattern p = Pattern.compile(pattern);
-            Matcher m = p.matcher(url);
-            if (m.matches()) { // if the url contains a disallowed directory >> return false
-                return false;
-            }
+        if (!robotRules.containsKey(host)) {
+            HostData hostData = new HostData();
+            hostData.checked = true;
+            robotRules.put(host, hostData);
+            return false;
         }
-
-        return true; // if no directory was matched >> allowed url, return true
+        directories = robotRules.get(host).disAllowedURLs;
+        if (directories != null) {
+            for (String pattern : directories) {
+                Pattern p = Pattern.compile(pattern);
+                Matcher m = p.matcher(url);
+                if (m.matches()) { // if the url contains a disallowed directory >> return false
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false; // if no directory was matched >> allowed url, return true
     }
 
 
     private String processPatterns(String directory) {
+        directory = directory.replaceAll("\\?$", "");
+        directory = directory.replaceAll("/$", "");
         directory = directory.replaceAll("\\*", ".*"); // replace '*' with '.*' to meet any char any number of times
+
         return ".*" + directory + ".*"; // wrap the directory with .* to search for it anywhere in the url
     }
 
     public static void main(String... args) {
         RobotChecker checker = new RobotChecker();
-        checker.isAllowed("https://bricks.stackexchange.com/robots.txt");
+        if(checker.isAllowed("https://bricks.stackexchange.com/users/passant?tab=accounts")){
+            System.out.println("ALLOWED!");
+        }
         checker.printDisallowed();
     }
 }
