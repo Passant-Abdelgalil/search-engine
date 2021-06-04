@@ -42,7 +42,7 @@ class FileFilling {
 
     static void fileWriterCreation() { // quikfix made me make it static
         try {
-            myWriter = new FileWriter(filename);
+            myWriter = new FileWriter(filename,true);
             // myWriter.write(URL);
 
         } catch (IOException e) {

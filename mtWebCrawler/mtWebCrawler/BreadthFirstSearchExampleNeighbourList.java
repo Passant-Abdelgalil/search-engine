@@ -42,7 +42,7 @@ public class BreadthFirstSearchExampleNeighbourList // its constructor makes the
 
         }
 
-        public synchronized void addneighbours(urlObj neighbourNode) {
+        public void addneighbours(urlObj neighbourNode) {
             this.neighbours.add(neighbourNode);
         }
 
@@ -79,9 +79,13 @@ public class BreadthFirstSearchExampleNeighbourList // its constructor makes the
 
     public synchronized void bfs(urlObj node) {
         // queue.add(node);
-        //node.visited = true;
-        visitedLinks.add(node.url);
-        urlsFile.WriteToFile(node.url);
+        // node.visited = true;
+        if (node != null && !visitedLinks.contains(node.url)) {
+            visitedLinks.add(node.url);
+            count++;
+            urlsFile.WriteToFile(node.url);
+        }
+
         // abeer
         // List<urlObj> neighbours = element.getNeighbours();
         // for (int i = 0; i < neighbours.size(); i++) {
@@ -102,17 +106,15 @@ public class BreadthFirstSearchExampleNeighbourList // its constructor makes the
         // urlObj element = queue.remove(); haaam 3mltha fl getqtop
         // System.out.print(element.url + "t"); //add to the file
 
-        //List<urlObj> neighbours = element.getNeighbours();
+        // List<urlObj> neighbours = element.getNeighbours();
         List<urlObj> neighbours = node.getNeighbours();
         for (int i = 0; i < neighbours.size(); i++) {
             urlObj n = neighbours.get(i);
-            if (n != null  && !visitedLinks.contains(n.url)) {  //&& !n.visited 
+            if (n != null && !visitedLinks.contains(n.url)) { // && !n.visited i made the check here bec it's shared
+                                                              // resourse
                 queue.add(n);
-                //n.visited = true;
-                visitedLinks.add(n.url);
-                count++;
-
-                urlsFile.WriteToFile(n.url);
+                // n.visited = true;
+                // visitedLinks.add(n.url);
 
             }
         }

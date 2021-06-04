@@ -23,25 +23,25 @@ import mtWebCrawler.BreadthFirstSearchExampleNeighbourList.urlObj;
 
 public class WebCrawler implements Runnable {
 
-    //private static final int MAX_DEPTH = 5000;
+    // private static final int MAX_DEPTH = 5000;
     private Thread thread;
-    //private String first_link;
+    // private String first_link;
 
     private int ID;
     private RobotChecker robotChecker;
     BreadthFirstSearchExampleNeighbourList bfsQueue;
-    //private int startLine;
+    // private int startLine;
 
-    //FileFilling file;
+    // FileFilling file;
 
     public WebCrawler(BreadthFirstSearchExampleNeighbourList bfsQueue, int num, RobotChecker checker) {
         System.out.print("WebCrawler created");
-        //first_link = link;
+        // first_link = link;
         ID = num;
-        this.bfsQueue=bfsQueue;
+        this.bfsQueue = bfsQueue;
         robotChecker = checker;
-        //this.startLine = startLine;
-        //this.file = file;
+        // this.startLine = startLine;
+        // this.file = file;
 
         thread = new Thread(this);
         thread.start();
@@ -57,7 +57,7 @@ public class WebCrawler implements Runnable {
             e.printStackTrace();
         }
 
-        //file.WriteToFile(first_link);
+        // file.WriteToFile(first_link);
 
         // crawl(startLine);
 
@@ -71,32 +71,35 @@ public class WebCrawler implements Runnable {
 
             urlObj top = bfsQueue.getQTop();
             Document doc = request(top.url);
-            //Document doc = null;
+            // Document doc = null;
             // try {
-            //     URLConnection uConn = new URL(bfsQueue.getQTop().url).openConnection();
-            //     String contentType = uConn.getHeaderField("Content-Type");
-            //     if (contentType.equals("text/html; charset=utf-8") || contentType.equals("text/html")) {
-            //         doc = request(top.url);
-            //         System.out.println("HTML");
-            //     }
+            // URLConnection uConn = new URL(bfsQueue.getQTop().url).openConnection();
+            // String contentType = uConn.getHeaderField("Content-Type");
+            // if (contentType.equals("text/html; charset=utf-8") ||
+            // contentType.equals("text/html")) {
+            // doc = request(top.url);
+            // System.out.println("HTML");
+            // }
             // } catch (Exception e) {
-            //     System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
             // }
 
             if (doc != null) {
                 for (Element link : doc.select("a[href]")) {
                     String next_link = link.absUrl("href");
-                    //next_link = URI.create(next_link).normalize().toString();
+                    // next_link = URI.create(next_link).normalize().toString();
                     try {
-                        robotChecker.getRules(next_link);
-                        //System.out.println(next_link);
+                        //robotChecker.getRules(next_link);
+                        // System.out.println(next_link);
                     } catch (Exception e) {
                         System.out.println("Error while checking robots.txt! " + e.getMessage());
                         continue;
                     }
 
-                    urlObj URLOBJJ = new urlObj(next_link);
-                    top.addneighbours(URLOBJJ);                    
+                    //if (next_link != null && !bfsQueue.visitedLinks.contains(next_link)) {
+                        urlObj URLOBJJ = new urlObj(next_link);
+                        top.addneighbours(URLOBJJ);
+                    //}
 
                 }
 
@@ -104,7 +107,7 @@ public class WebCrawler implements Runnable {
             }
 
             crawl();
-            //bfsQueue.bfs(bfsQueue.getQTop());
+            // bfsQueue.bfs(bfsQueue.getQTop());
         }
     }
 
@@ -143,7 +146,7 @@ public class WebCrawler implements Runnable {
 
     // }
 
-    private Document request(String url) {
+    private Document request(String url) { // Parsing HTML document
         try {
             Connection con = Jsoup.connect(url);
             Document doc = con.get();
@@ -153,13 +156,13 @@ public class WebCrawler implements Runnable {
                 // file.WriteToFile(url);
                 // if (file.count <= 5000) {
 
-                //     file.WriteToFile(url);
+                // file.WriteToFile(url);
                 // }
 
                 String title = doc.title();
                 System.out.println(title);
                 // synchronized (this.file) {
-                //     file.visitedLinks.add(url);
+                // file.visitedLinks.add(url);
                 // }
 
                 return doc;
