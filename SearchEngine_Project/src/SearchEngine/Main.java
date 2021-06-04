@@ -1,8 +1,14 @@
 package SearchEngine;
 
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class SearchEngine {
 
-    public static void main(String... args) throws InterruptedException {
+    public static void main(String... args) throws InterruptedException, UnknownHostException {
 
         RobotChecker checker = new RobotChecker();
         FileFilling file = new FileFilling();
@@ -21,9 +27,7 @@ class SearchEngine {
             crawlerThreads[i].join();
 
         }
-/*
-        RobotChecker.checkEncoding("https://yoast.com/search-operators/");
-        RobotChecker.checkEncoding("https://yoast.com/search-operators/1");
-*/
+
     }
+
 }
