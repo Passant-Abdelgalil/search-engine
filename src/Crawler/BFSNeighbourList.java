@@ -75,27 +75,31 @@ public class BFSNeighbourList {
 
     public synchronized void bfs(urlObj node) {
         //node.visited = true;
-        visitedLinks.add(node.url);
+        // normalized
+        String normalized = normalizer.normalizePreservedSemantics(node.url);
+        normalized = normalizer.normalizeSemantics(normalized);
+        visitedLinks.add(normalized);
         count++;
         urlsFile.WriteToFile(node.url);
 
         List<urlObj> neighbours = node.getNeighbours();
         for (urlObj url : neighbours) {
             if (count >= 5000) break;
-            String normalized = normalizer.normalizePreservedSemantics(url.url);
+            normalized = normalizer.normalizePreservedSemantics(url.url);
             normalized = normalizer.normalizeSemantics(normalized);
 
             if (!visitedLinks.contains(normalized)) {
                 queue.add(url);
-                visitedLinks.add(normalized);
-                count++;
-                urlsFile.WriteToFile(url.url);
+                //visitedLinks.add(normalized);
+                //count++;
+                //urlsFile.WriteToFile(url.url);
             }
             try {
                 Thread.sleep(200);
             } catch (Exception ignored) {
             }
         }
+        System.out.println(Thread.currentThread().getName()+" Has " + visitedLinks.size() + " Unique Link");
     }
 
     private Document request(String url) {

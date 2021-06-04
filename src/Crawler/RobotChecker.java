@@ -1,5 +1,9 @@
 package Crawler;
 
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,13 +53,14 @@ public class RobotChecker {
         URL url = new URL(seed);
 
         String hostName = url.getHost();
-
+        //request(url.getProtocol() + "://"+hostName+"/robots.txt");
         try {
             url = new URL(url.getProtocol() + "://" + hostName + "/robots.txt");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
+
         try (Reader streamReader = connect(url)) {
             if (streamReader != null) {
                 BufferedReader reader = new BufferedReader(streamReader);
@@ -159,7 +164,7 @@ public class RobotChecker {
 
     public static void main(String... args) {
         RobotChecker checker = new RobotChecker();
-        checker.isAllowed("https://www.blurtit.com/topics");
+        checker.isAllowed("https://bricks.stackexchange.com/robots.txt");
         checker.printDisallowed();
     }
 }

@@ -24,25 +24,26 @@ public class FileFilling {
     {
         FileFilling.filename=filename;
     }
-    static void fileCreating() {
+    static boolean fileCreating() {
         try {
             myObj = new File(filename);
             if (myObj.createNewFile()) {
                 System.out.println("File created: " + myObj.getName());
+                return true;
             } else {
                 System.out.println("File already exists.");
+                return false;
             }
         } catch (IOException ex) {
             System.out.println("An error occurred.");
             ex.printStackTrace();
+            return true;
         }
     }
 
     static void fileWriterCreation() { // quikfix made me make it static
         try {
-            myWriter = new FileWriter(filename);
-            // myWriter.write(URL);
-
+            myWriter = new FileWriter(filename, true);
         } catch (IOException e) {
             System.out.println("An error occurred when Write to file.");
         }
