@@ -1,26 +1,33 @@
 package Crawler;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+
 import org.jsoup.Jsoup;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
 
-import org.jsoup.nodes.Element;public class BreadthFirstSearchExampleNeighbourList {
-    // from abeer
+public class BFSNeighbourList {
     FileFilling seedsFile;
     FileFilling urlsFile;
     ArrayList<String> seed;
-    // abeer
     urlObj element;
     int count = 0;
+    URINormalizer normalizer;
     ArrayList<String> visitedLinks = new ArrayList<String>();
 
-    private Queue<urlObj> queue;
+    public Queue<urlObj> queue;
     static ArrayList<urlObj> urls = new ArrayList<urlObj>();
+
+    public void printQueue() {
+        Iterator<urlObj> iterator = queue.iterator();
+        while (iterator.hasNext()) {
+            urlObj url = iterator.next();
+            if (url != null) {
+                System.out.println(url.url);
+            }
+        }
+    }
 
     static class urlObj // urlObj
     {
@@ -46,67 +53,49 @@ import org.jsoup.nodes.Element;public class BreadthFirstSearchExampleNeighbourLi
             this.neighbours = neighbours;
         }
     }
-    public BreadthFirstSearchExampleNeighbourList(ArrayList<String> seed, FileFilling urlsFile) {
-        queue = new LinkedList<urlObj>();
 
+    public BFSNeighbourList(ArrayList<String> seed, FileFilling urlsFile, URINormalizer normalizer) {
+        queue = new LinkedList<urlObj>();
+        this.normalizer = normalizer;
         this.seed = seed;
         this.urlsFile = urlsFile;
 
         for (int i = 0; i < 5; i++) {
-            // String urlstr = seedsFile.ReadFromFile(i);
             queue.add(new urlObj(seed.get(i)));
         }
-        System.out.println("q filled with seed");
-        // System.out.println(getQTop().url);
+        System.out.println("Queue filled with seeds");
     }
-    public synchronized urlObj getQTop() {
-        element = queue.remove();
-        // return queue.peek();
-        return element;
 
+    public synchronized urlObj getQTop() {
+        if (queue.size() > 0) {
+            return queue.remove();
+        }
+        return null;
     }
 
     public synchronized void bfs(urlObj node) {
-        // queue.add(node);
         //node.visited = true;
         visitedLinks.add(node.url);
+        count++;
         urlsFile.WriteToFile(node.url);
-        // abeer
-        // List<urlObj> neighbours = element.getNeighbours();
-        // for (int i = 0; i < neighbours.size(); i++) {
-        // urlObj n = neighbours.get(i);
-        // if (n != null && !n.visited) {
-        // queue.add(n);
-        // n.visited = true;
-        // count++;
 
-        // urlsFile.WriteToFile(n.url);
-
-        // }
-        // }
-        // end abeer
-
-        // while (!queue.isEmpty() && count <= 5000) {
-
-        // urlObj element = queue.remove(); haaam 3mltha fl getqtop
-        // System.out.print(element.url + "t"); //add to the file
-
-        //List<urlObj> neighbours = element.getNeighbours();
         List<urlObj> neighbours = node.getNeighbours();
-        for (int i = 0; i < neighbours.size(); i++) {
-            urlObj n = neighbours.get(i);
-            if (n != null  && !visitedLinks.contains(n.url)) {  //&& !n.visited
-                queue.add(n);
-                //n.visited = true;
-                visitedLinks.add(n.url);
+        for (urlObj url : neighbours) {
+            if (count >= 5000) break;
+            String normalized = normalizer.normalizePreservedSemantics(url.url);
+            normalized = normalizer.normalizeSemantics(normalized);
+
+            if (!visitedLinks.contains(normalized)) {
+                queue.add(url);
+                visitedLinks.add(normalized);
                 count++;
-
-                urlsFile.WriteToFile(n.url);
-
+                urlsFile.WriteToFile(url.url);
+            }
+            try {
+                Thread.sleep(200);
+            } catch (Exception ignored) {
             }
         }
-
-        // }
     }
 
     private Document request(String url) {
