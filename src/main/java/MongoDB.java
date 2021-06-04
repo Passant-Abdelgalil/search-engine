@@ -25,17 +25,17 @@ public class MongoDB {
     public static void main( String [] args) throws IOException {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         database = mongoClient.getDB("Indexer");
-        test = database.getCollection("test");
+        test = database.getCollection("test5");
         ReadFromFile();
 
         Stream<String> htmlUrlsSplitted = Files.lines(Paths.get("C:\\Users\\Raghod\\IdeaProjects\\indexer\\src\\main\\java\\input.txt"));
         String[] URLarry = htmlUrlsSplitted.toArray(String[]::new);
-        for (int i = 0; i < URLarry.length; i++) {
+       for (int i = 0; i < URLarry.length; i++) {
             String URL=URLarry[i];
             Document docForEachHtmlURL = Jsoup.connect(URLarry[i]).get();
             String[] GetNumbOfWords = docForEachHtmlURL.text().split(" ");
             System.out.println(GetNumbOfWords.length);
-
+            int Long =GetNumbOfWords.length;
             Elements elements = docForEachHtmlURL.select("*");
             for (Element e : elements)
                 if (e.childrenSize() == 0 && e.tagName() != "body" && e.tagName() != "#root" && e.tagName() != "html" && !(e.text().equals("")) && e.tagName() != "style" && e.tagName() != "script") {
@@ -49,11 +49,11 @@ public class MongoDB {
                        // wordInSentence=wordInSentence.toLowerCase();
 
                             if(WordExists(wordInSentence,test) && WordExistsAndurl(wordInSentence,URL,test)){
-                                insertsentance(wordInSentence,URL,sentance,TAG,test);
+                                insertsentance(wordInSentence,URL,sentance,TAG,Long,test);
                             }else if(WordExists(wordInSentence,test)){
-                                insertURL(wordInSentence,URL,sentance,TAG,test);
+                                insertURL(wordInSentence,URL,sentance,TAG,Long,test);
                             }else{
-                                insertDB(wordInSentence,URL,sentance,TAG,test);
+                                insertDB(wordInSentence,URL,sentance,TAG,Long,test);
                             }
 
 
@@ -64,7 +64,7 @@ public class MongoDB {
            }
 
 
-
+        //putIDF("free",test,database);
 
     //insertDB("Raghod","ww","plapla","a",test);
     //insertURL("Raghod","R.Com","Hi","div",test);
@@ -128,9 +128,9 @@ public class MongoDB {
         return sb.toString();
     }
 
-    public static void insertDB(String word,String URL,String Sentance ,String Tag,DBCollection t){
-        DBObject WordFrist = new BasicDBObject("Word", word)
-                .append("pages",  asList(new BasicDBObject("URL", URL).append("Sentance", asList(Sentance)).append("tag",asList(Tag))
+    public static void insertDB(String word,String URL,String Sentance ,String Tag,int Long,DBCollection t){
+        DBObject WordFrist = new BasicDBObject("Word", word).append("IDF",.0002)
+                .append("pages",  asList(new BasicDBObject("URL", URL).append("Sentance", asList(Sentance)).append("tag",asList(Tag)).append("TF",1.0/Long)
                         ));
         t.insert(WordFrist);
     }
@@ -153,19 +153,21 @@ public class MongoDB {
         return cursor.one() !=null;
     }
 
-    public static void insertURL(String Word,String Url,String Sentance,String tag, DBCollection t){
+    public static void insertURL(String Word,String Url,String Sentance,String tag,int Long ,DBCollection t){
         //DBObject WordFrist = new BasicDBObject("URL", Url).append("Sentance", asList(Sentance)).append("tag",asList(tag));
         BasicDBObject Wordobj=new BasicDBObject("Word", Word);
         BasicDBObject commentObject = new BasicDBObject();
         commentObject.put("URL", Url);
         commentObject.put("Sentance", asList(Sentance));
         commentObject.put("tag",asList(tag));
+        commentObject.put("TF",1.0/Long);
         t.update(Wordobj, new BasicDBObject(
                         "$push", new BasicDBObject("pages", commentObject)), false,
                 false);
+        t.update(Wordobj, new BasicDBObject("$inc",new BasicDBObject("IDF",.0002)));
     }
 
-     public static void insertsentance(String Word,String Url,String Sentance,String tag, DBCollection t){
+     public static void insertsentance(String Word,String Url,String Sentance,String tag,int Long, DBCollection t){
 
          BasicDBObject quary = new BasicDBObject();
          List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
@@ -178,6 +180,8 @@ public class MongoDB {
          updatequ.put("$addToSet",new BasicDBObject("pages.$.tag", tag));
          System.out.println(updatequ.toString());
          t.update(quary,updatequ);
+        // BasicDBObject Wordobj=new BasicDBObject("Word", Word);
+         t.update(quary, new BasicDBObject("$inc",new BasicDBObject("pages.$.TF",1.0/Long)));
          /*BasicDBObject f1=new BasicDBObject();
          f1.put("$elemMatch",new BasicDBObject("URL",Url));
          BasicDBObject f2 = new BasicDBObject("Word", Word)
@@ -194,5 +198,27 @@ public class MongoDB {
                  false);*/
      }
 
+     public static void putIDF(String Word,DBCollection t,DB db){
+         BasicDBObject updatequ=new BasicDBObject();
+         updatequ.put("Word",1);
+         updatequ.put("pages",1);
+         updatequ.put("IDF",new BasicDBObject( "$size" , "$pages"));
+         BasicDBObject pla=new BasicDBObject("$project", updatequ);
+         BasicDBObject cr=new BasicDBObject();
+         cr.put("cursor",new BasicDBObject( "batchSize" , 0));
+         //List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+         //obj.add(updatequ);
+         //obj.add(cr);
+         try {
+             t.aggregate(asList(updatequ));
+         }catch (Exception e){
+             System.out.println(e.getMessage());
+         }
+         //t.find(new BasicDBObject("Word",Word));
+         //AggregationOutput output = db.getCollection("test").aggregate(pla);
+         System.out.println(asList(pla).toString());
+         System.out.println(cr.toString());
+
+     }
 
 }
