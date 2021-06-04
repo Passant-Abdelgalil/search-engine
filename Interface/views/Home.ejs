@@ -1,0 +1,97 @@
+<%- include("layouts/header") %>
+ <div class="main_container">
+
+    <% if(message.length >0){ %>
+        <div id="alerty" class="alert alert-success">
+
+        <button id="msg"><%= message %></button> 
+            <button id='close' onclick='this.parentNode.parentNode.removeChild(this.parentNode); return false;'>x</button>
+        </div><br>
+    <% } %>
+
+        <div class="sub_container1  wow animate__animated animate__backInLeft">
+            <img src="/images/edu_ilastration.png ">
+
+            <div class="body-content wow animate__animated animate__heartBeat animate__repeat-2">
+                <h1 class=" ">C-Craft Student Activity</h1>
+                </br>
+                </br>
+                <p>It's created by Computer Engineering students at cairo university.</br>
+                    </br>
+                    We aim to help each other and spread science.</br>
+                    We also started with the most important four fields of Computer Engineering Department.
+                </p>
+            </div>
+        </div>
+ </div>
+    <div class="courses">
+        <h1>Our Courses</h1>
+        <div class="Embedded wow animate__animated animate__backInDown ">
+            <img src="/images/courses\embeded\Embeded.png">
+            <div class="Details  wow animate__animated animate__fadeIn animate__repeat-2">
+                <h1>Embedded System</h1>
+                <p>Have you ever wondered how your code is executed? 
+                What do people mean by architecture and pipelines and all those stuff ? 
+                How to implement ADCs, PWM signals and communication protocols ?
+                 If you are interested and want to know the answer of those questions then, you should enroll in our embedded systems course.
+                  In this course we assume that you have a prior knowledge of logic design and programming so that,
+                   we can skip all the boring stuff and focus on our goal of learning embedded systems.
+                    Our journey starts by a crash course about the C language and revealing its secrets,
+                     and some professionals - monopolized topics.Then, we will dive deeply into our CPU to understand how the code is executed,
+                      and the difference between the different architectures.
+                      Then, we will take our way back again building an entire RAM with just logic gates.
+                       After those low level stuff, action comes! We will deal directly with our microcontroller to control motors,
+                        use sensors and interface with different devices using the standard communication protocols.
+                 At the end of the course there is an optional crash course about Real Time Operating System 'RTOS'. </br>
+                    </p>
+                <a href="/Embedded"><button>View Course</button></a>
+            </div>
+
+        </div>
+        <div class="Machine wow animate__animated animate__backInRight ">
+            <img src="/images/courses\machine\Machine2.png">
+            <div class="Details wow animate__animated animate__fadeInRight animate__repeat-2">
+                <h1>Machine learning</h1>
+                <p>This course delivers an ample overture to Machine Learning with picking up
+                 on all of the needed advanced mathematics, the course depicts a broad spectrum 
+                 of algorithms that are used in supervised and unsupervised learning, ranging
+                  from linear & logistic regression to clustering and recommendor systems,
+                   the syllabus also tops off with an introduction to neural networks
+                    and deep learning along with a team-based course project with applications 
+                    on most of what has been covered.
+                
+                </br></p>
+                <a href="/Machine"><button>View Course</button></a>
+            </div>
+
+        </div>
+        <div class="web wow animate__animated animate__backInLeft">
+            <img src="/images/courses\web\Web.png ">
+            <div class="Details wow animate__animated animate__fadeInLeft animate__repeat-2">
+                <h1>Web Development</h1>
+                <p>In this course, you will learn everything about the basics of being a full-stack web developer.
+                 The course is divided into three parts. First is front-end web development,
+                  where you will learn about how to build the website's view, and how the user will interact with it in the browser.
+                   Second is back-end web development, where you will learn how to connect to the server, render your front-end files,
+                    get data from the browser, and store these data in a database.
+                     Finally, you will learn about the basics of the CMD (Windows Command Line), and about Git and GitHub.
+                      Previous knowledge about programming in any language such as C++ or Python is preferable for joining this course.</p>
+                <a href="/Web"><button>View Course</button></a>
+            </div>
+
+        </div>
+        <div class="Graphics wow animate__animated animate__backInUp ">
+            <img src="/images/courses\graphics\Graphics.png">
+            <div class="Details wow animate__animated animate__fadeIn animate__repeat-2">
+                <h1>3D Graphics</h1>
+               <p>This is an introductory 3D Graphics course using Cinema4D. No pre-requisites needed.
+                For the most part, we will be exploring each aspect of Cinema4D and understanding the basic tools & concepts,
+                 rather than diving too deep in a certain one. This includes Modeling, Animation, Motion Graphics, Texturing & Rendering.
+                  All these can help you get comfortable & ready to create your own 3D art!!</p>
+
+                <a href="/Graphics"><button>View Course</button></a>
+            </div>
+
+        </div>
+    </div>
+    <%- include("layouts/footer") %>
