@@ -16,9 +16,6 @@ public class Crawler {
         seed.add("https://www.bbc.com/news/world");
 
 
-/*        FileFilling seedfile = new FileFilling("seedsFile.txt");
-        FileFilling.fileCreating();
-*/
         FileFilling urlFile = new FileFilling("urlsFile.txt");
         if(urlFile.fileCreating()){
             for(String url: seed) {

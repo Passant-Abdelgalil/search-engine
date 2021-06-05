@@ -1,6 +1,7 @@
 package Crawler;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -49,7 +50,7 @@ public class WebCrawler implements Runnable {
                 }
             }
             // Crawling Logic
-            if (!stopCrawling && top != null) {
+            if (!stopCrawling && top != null && top.url.trim()!="") {
                 // Check HTML Documents
                 Document doc = request(top.url);
                 // If the url is for HTML document, crawl it
@@ -58,12 +59,12 @@ public class WebCrawler implements Runnable {
                     System.out.println("Thread "+ getThread().getName()+ " will crawl " + doc.select("a[href]").size() + " link");
                     for (Element link : doc.select("a[href]")) {
                         String next_link = link.absUrl("href");
-                        if (robotChecker.isAllowed(next_link)) {
+                       // if (robotChecker.isAllowed(next_link)) {
                             top.addneighbours(new urlObj(next_link));
-                        }
+                       // }
                     }
                     System.out.println(getThread().getName() + " will write to file");
-                    synchronized (this) {
+                    synchronized (this.bfsQueue) {
                         bfsQueue.bfs(top);
                     }
                 }

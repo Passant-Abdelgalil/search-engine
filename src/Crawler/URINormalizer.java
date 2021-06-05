@@ -77,10 +77,10 @@ public class URINormalizer {
             URL Url = new URL(url);
             Pattern pattern = Pattern.compile(Url.getHost());
             Matcher matcher = pattern.matcher(url);
-
-            while (matcher.find()) {
+            if(matcher.find()) {
                 url = url.substring(0, matcher.start()) + url.substring(matcher.start(), matcher.end()).toLowerCase() + url.substring(matcher.end());
             }
+
             pattern = Pattern.compile(".*://");
             matcher = pattern.matcher(url);
             if (matcher.find()) {
@@ -105,7 +105,7 @@ public class URINormalizer {
             url = url.replaceAll(matcher.group(0), String.valueOf(matcher.group(0).charAt(2)));
         }
         // LETTER DECODER
-        url = decodeLetter(url);
+        //url = decodeLetter(url);
         return url;
     }
 

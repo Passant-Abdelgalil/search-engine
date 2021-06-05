@@ -2,7 +2,7 @@ package Crawler;
 
 import java.io.IOException;
 import java.util.*;
-
+import java.net.URI;
 import org.jsoup.Jsoup;
 import org.jsoup.Connection;
 import org.jsoup.nodes.Document;
@@ -74,10 +74,10 @@ public class BFSNeighbourList {
     }
 
     public synchronized void bfs(urlObj node) {
-        //node.visited = true;
         // normalized
         String normalized = normalizer.normalizePreservedSemantics(node.url);
         normalized = normalizer.normalizeSemantics(normalized);
+
         if (!visitedLinks.contains(normalized)) {
             visitedLinks.add(normalized);
             count++;
@@ -88,74 +88,12 @@ public class BFSNeighbourList {
             if (count >= 5000) break;
             normalized = normalizer.normalizePreservedSemantics(url.url);
             normalized = normalizer.normalizeSemantics(normalized);
-
             if (!visitedLinks.contains(normalized)) {
                 queue.add(url);
-                //visitedLinks.add(normalized);
-                //count++;
-                //urlsFile.WriteToFile(url.url);
-            }
-            try {
-                Thread.sleep(200);
-            } catch (Exception ignored) {
+                visitedLinks.add(normalized);
             }
         }
         System.out.println(Thread.currentThread().getName()+" Has " + visitedLinks.size() + " Unique Link");
     }
 
-    private Document request(String url) {
-        try {
-            Connection con = Jsoup.connect(url);
-            Document doc = con.get();
-
-            if (con.response().statusCode() == 200) {
-                // System.out.println("\n**Bot ID:" + ID + " Received Webpage at " + url);
-                // file.WriteToFile(url);
-                // if (file.count <= 5000) {
-
-                // file.WriteToFile(url);
-                // }
-
-                String title = doc.title();
-                System.out.println(title);
-                // synchronized (this.file) {
-                // file.visitedLinks.add(url);
-                // }
-
-                return doc;
-
-                // HttpURLConnection urlc = (HttpURLConnection)url.openConnection();
-                // urlc.setAllowUserInteraction( false );
-                // urlc.setDoInput( true );
-                // urlc.setDoOutput( false );
-                // urlc.setUseCaches( true );
-                // urlc.setRequestMethod("HEAD");
-                // urlc.connect();
-                // String mime = urlc.getContentType();
-                // if(mime.equals("text/html") {
-                // // do your stuff
-
-                // System.out.println("\n**Bot ID:" + ID + " Received Webpage at " + url);
-                // // file.WriteToFile(url);
-                // if (file.count <= 5000) {
-
-                // file.WriteToFile(url);
-                // }
-
-                // String title = doc.title();
-                // System.out.println(title);
-                // synchronized (this.file) {
-                // file.visitedLinks.add(url);
-                // }
-
-                // return doc;
-                // }
-
-            }
-            return null;
-        } catch (IOException e) {
-            return null;
-        }
-
-    }
 }
