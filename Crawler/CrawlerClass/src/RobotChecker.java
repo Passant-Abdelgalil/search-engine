@@ -1,16 +1,9 @@
-package Crawler;
-
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RobotChecker {
+
     static class HostData {
         boolean checked;
         ArrayList<String> disAllowedURLs;
@@ -48,50 +42,56 @@ public class RobotChecker {
     public void getRules(String seed) throws IOException {
 
         if (isChecked(seed)) return;
-
         // generate the url for robots.txt
 
         URL url = new URL(seed);
+        String hostName = url.getHost(); // stackoverflow.com
+        hostName = hostName.replace("www.", "");
+        String protocol = url.getProtocol(); // https: http
 
-        String hostName = url.getHost();
-        //request(url.getProtocol() + "://"+hostName+"/robots.txt");
         try {
-            url = new URL(url.getProtocol() + "://" + hostName + "/robots.txt");
+            url = new URL(protocol + "://" + hostName + "/robots.txt");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
+        Reader streamReader = connect(url);
 
-        try (Reader streamReader = connect(url)) {
-            if (streamReader != null) {
-                BufferedReader reader = new BufferedReader(streamReader);
-                boolean user_agent = false;
-                String inputLine;
-                HostData hostData = new HostData();
-                while ((inputLine = reader.readLine()) != null) {
-                    if (inputLine.toLowerCase().startsWith("user-agent")) {
-                        if (inputLine.contains("*")) {
-                            user_agent = true;
-                        } else if (user_agent) { // if it's for a specific crawler & we read '*', then no need to keep reading
-                            break;
-                        }
-                    }
-                    if (user_agent && inputLine.toLowerCase().startsWith("disallow")) {
-                        String directory = inputLine.substring(inputLine.indexOf(":") + 2);
-                        hostData.disAllowedURLs.add(processPatterns(directory));
+        if (streamReader != null) {
+
+            BufferedReader reader = new BufferedReader(streamReader);
+            boolean user_agent = false;
+            String inputLine;
+            HostData hostData = new HostData();
+            while ((inputLine = reader.readLine()) != null) {
+                // we are only interested in 'User-Agent: *' line
+                if (inputLine.toLowerCase().startsWith("user-agent")) { // if user-agent line
+                    if (inputLine.contains("*")) { // if the rules are for all crawlers
+                        user_agent = true; // set the flag to start parsing rules
+                    } else if (user_agent) { // if it's for a specific crawler & we read '*', then no need to keep
+                        // reading
+                        break;
                     }
                 }
-                hostData.checked = true;
-                this.robotRules.put(hostName, hostData); // add the host with its robot rules to our map
-
-            } else {
-                System.out.println("couldn't connect to: " + url);
+                if (user_agent && inputLine.toLowerCase().startsWith("disallow")) { // rule line   /api/
+                    String directory = inputLine.substring(inputLine.indexOf(":") + 2); // read the disallowed
+                    // directory/file
+                    hostData.disAllowedURLs.add(processPatterns(directory)); // preprocess the directory pattern before adding it
+                    // to the list
+                }
             }
+            hostData.checked = true;
+            this.robotRules.put(hostName, hostData); // add the host with its robot rules to our map
+        }else{
+            HostData hostData = new HostData();
+            hostData.checked = true;
+            hostData.disAllowedURLs = new ArrayList<>();
+            this.robotRules.put(hostName, hostData);
         }
     }
 
     private Reader connect(URL url) throws IOException {
-        System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+        // open connection to send requests
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
         // sending the GET request to /robots.txt
@@ -121,64 +121,56 @@ public class RobotChecker {
         }
     }
 
-    public boolean isAllowed(String url) {
+    public boolean isAllowed(String urlString) {
 
         String host = ""; // get host name from the url
         String protocol = "";
         try {
-            host = new URL(url).getHost();
-            protocol = new URL(url).getProtocol();
+            URL url = new URL(urlString);
+            host = url.getHost();
+            protocol = url.getProtocol();
             host = host.replace("www.", "");
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             return false;
         }
         if (host.equals("")) { // invalid url, couldn't extract host name >> return false
             return false;
         }
-        ArrayList<String> directories = new ArrayList<>();
+        ArrayList<String> directories;
         if (!robotRules.containsKey(host)) {
             try {
-                this.getRules(url);
+                this.getRules(protocol+"://"+host);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return false;
             }
         }
-        if (!robotRules.containsKey(host)) {
-            HostData hostData = new HostData();
-            hostData.checked = true;
-            robotRules.put(host, hostData);
-            return false;
-        }
-        directories = robotRules.get(host).disAllowedURLs;
-        if (directories != null) {
+        try {
+            directories = robotRules.get(host).disAllowedURLs;
             for (String pattern : directories) {
                 Pattern p = Pattern.compile(pattern);
-                Matcher m = p.matcher(url);
+                Matcher m = p.matcher(urlString);
                 if (m.matches()) { // if the url contains a disallowed directory >> return false
                     return false;
                 }
             }
-            return true;
+        }catch (Exception e){
+            System.out.println(host);
+            System.out.println(e.getMessage());
         }
-        return false; // if no directory was matched >> allowed url, return true
+        return true; // if no directory was matched >> allowed url, return true
     }
 
-
     private String processPatterns(String directory) {
-        directory = directory.replaceAll("\\?$", "");
         directory = directory.replaceAll("/$", "");
         directory = directory.replaceAll("\\*", ".*"); // replace '*' with '.*' to meet any char any number of times
-
         return ".*" + directory + ".*"; // wrap the directory with .* to search for it anywhere in the url
     }
 
     public static void main(String... args) {
         RobotChecker checker = new RobotChecker();
-        if(checker.isAllowed("https://bricks.stackexchange.com/users/passant?tab=accounts")){
-            System.out.println("ALLOWED!");
-        }
-        checker.printDisallowed();
+        checker.isAllowed("https://meta.stackoverflow.com");
     }
-}
 
+
+}
