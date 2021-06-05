@@ -40,7 +40,7 @@ public class WebCrawler implements Runnable {
             Document doc = null;
             // Check the stopping criteria
             synchronized (this.bfsQueue) {
-                if (bfsQueue.count >= 5000) { // untill we have 5000 link //&& file.count<=5000 8alat
+                if (bfsQueue.count >= 5001) { // untill we have 5000 link //&& file.count<=5000 8alat
                     stopCrawling = true;
                 } else {
                     top = bfsQueue.getQTop();
@@ -55,7 +55,7 @@ public class WebCrawler implements Runnable {
                     doc = request(top.url);
                 // If the url is for HTML document, crawl it
                 if (doc != null) {
-                    if (!doc.documentType().name().equals("html"))
+                    if (doc.documentType() != null && !doc.documentType().name().equals("html"))
                         continue;
                     System.out.println("Thread " + getThread().getName() + " will crawl " + doc.select("a[href]").size()
                             + " link");
@@ -81,12 +81,20 @@ public class WebCrawler implements Runnable {
             Connection con = null;
             if (url != null && url.length() != 0) {
                 con = Jsoup.connect(url);
-                Document doc = con.get();
-                if (con.response().statusCode() == 200) {
-                    System.out.println("\n**Bot ID:" + ID + " Received Webpage at " + url);
-                    String title = doc.title();
-                    System.out.println(title);
-                    return doc;
+                if (con != null) {
+                    Document doc = con.get();
+                    if (con.response().statusCode() == 200) {
+                        System.out.println("\n**Bot ID:" + ID + " Received Webpage at " + url);
+                        String title;
+                        if (doc != null) {
+                            title = doc.title();
+                            System.out.println(title);
+                            return doc;
+                        }
+
+                        return null;
+                    }
+                    return null;
                 }
                 return null;
             }

@@ -9,11 +9,16 @@ public class mtCrawler {
     public mtCrawler() {
         /*                                          Seeds                                               */
         ArrayList<String> seed = new ArrayList<String>();
-        seed.add("https://en.wikipedia.org/wiki/Main_Page");
-        seed.add("https://stackoverflow.com/questions/");
-        seed.add("https://stackexchange.com/");
-        seed.add("https://www.blurtit.com/topics");
-        seed.add("https://www.bbc.com/news/world");
+        // seed.add("https://en.wikipedia.org/wiki/Main_Page");
+        // seed.add("https://stackoverflow.com/questions/");
+        // seed.add("https://stackexchange.com/");
+        // seed.add("https://www.blurtit.com/topics");
+        // seed.add("https://www.bbc.com/news/world");
+        seed.add("https://en.wikipedia.org/");
+        seed.add("https://stackoverflow.com");
+        seed.add("https://quora.com");
+        seed.add("https://reddit.com");
+        seed.add("https://geeksforgeeks.or");
 
 
 /*        FileFilling seedfile = new FileFilling("seedsFile.txt");

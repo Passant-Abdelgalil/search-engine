@@ -97,7 +97,7 @@ public class BFSNeighbourList {
         if (!visitedLinks.contains(node.url)) {
             visitedLinks.add(node.url);
             count++;
-            if (count == 5000)
+            if (count == 5001)
                 reached5000 = true;
 
             if (!reached5000)
@@ -106,7 +106,7 @@ public class BFSNeighbourList {
         }
         List<urlObj> neighbours = node.getNeighbours();
         for (urlObj urlo : neighbours) {
-            if (count >= 5000)
+            if (count >= 5001)
                 break;
             // normalized = normalizer.normalizePreservedSemantics(url.url);
             // normalized = normalizer.normalizeSemantics(normalized);
