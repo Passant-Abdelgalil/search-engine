@@ -1,4 +1,4 @@
-package mtWebCrawler;
+package crawler;
 
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 public class URINormalizer {
     URINormalizer() { }
@@ -167,4 +166,5 @@ public class URINormalizer {
         }
         return url;
     }
+
 }

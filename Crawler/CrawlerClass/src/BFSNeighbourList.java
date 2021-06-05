@@ -1,17 +1,13 @@
-package mtWebCrawler;
-
 import java.util.*;
 
 public class BFSNeighbourList {
     FileFilling seedsFile;
     FileFilling urlsFile;
     ArrayList<String> seed;
-    urlObj element;
     long count = 0;
-    boolean reached5000 = false;
     URINormalizer normalizer;
     ArrayList<String> visitedLinks = new ArrayList<String>();
-
+    RobotChecker robotChecker;
     public Queue<urlObj> queue;
     static ArrayList<urlObj> urls = new ArrayList<urlObj>();
 
@@ -50,11 +46,12 @@ public class BFSNeighbourList {
         }
     }
 
-    public BFSNeighbourList(ArrayList<String> seed, FileFilling urlsFile, URINormalizer normalizer) {
+    public BFSNeighbourList(ArrayList<String> seed, FileFilling urlsFile, URINormalizer normalizer, RobotChecker robot) {
         queue = new LinkedList<urlObj>();
         this.normalizer = normalizer;
         this.seed = seed;
         this.urlsFile = urlsFile;
+        this.robotChecker = robot;
 
         if (urlsFile.isFileEmpty()) {
             for (int i = 0; i < 5; i++) {
@@ -69,7 +66,7 @@ public class BFSNeighbourList {
                 String u = urlsFile.ReadFromFile(i);
                 visitedLinks.add(u);
             }
-
+            System.out.println("Queue filled with seeds");
             count = numLines;
             urlsFile.closeFis();
         }
@@ -84,44 +81,32 @@ public class BFSNeighbourList {
     }
 
     public synchronized void bfs(urlObj node) {
-        // node.visited = true;
-        // normalized
-        // String normalized = normalizer.normalizePreservedSemantics(node.url);
-        // normalized = normalizer.normalizeSemantics(normalized);
-        // if (!visitedLinks.contains(normalized)) {
-        // visitedLinks.add(normalized);
-        // count++;
-        // urlsFile.WriteToFile(node.url);
-        // }
+        String normalized;
+        if(robotChecker.isAllowed(node.url)) {
+            normalized = normalizer.normalizePreservedSemantics(node.url);
+            normalized = normalizer.normalizeSemantics(normalized);
 
-        if (!visitedLinks.contains(node.url)) {
-            visitedLinks.add(node.url);
-            count++;
-            if (count == 5000)
-                reached5000 = true;
-
-            if (!reached5000)
-                urlsFile.WriteToFile(node.url);
-            System.out.println("count of urls = " + count);
+            if (!visitedLinks.contains(normalized)) {
+                visitedLinks.add(normalized);
+                count++;
+                if (count <= 5000)
+                    urlsFile.WriteToFile(node.url);
+                System.out.println("count of urls = " + count);
+            }
         }
         List<urlObj> neighbours = node.getNeighbours();
         for (urlObj urlo : neighbours) {
             if (count >= 5000)
                 break;
-            // normalized = normalizer.normalizePreservedSemantics(url.url);
-            // normalized = normalizer.normalizeSemantics(normalized);
+            if (robotChecker.isAllowed(urlo.url)) {
+                normalized = normalizer.normalizePreservedSemantics(urlo.url);
+                normalized = normalizer.normalizeSemantics(normalized);
 
-            // if (!visitedLinks.contains(normalized)) {
-            if (!visitedLinks.contains(urlo.url)) {
-                queue.add(urlo);
-                // visitedLinks.add(normalized);
-                // count++;
-                // urlsFile.WriteToFile(url.url);
+                if (!visitedLinks.contains(normalized)) {
+                    queue.add(urlo);
+
+                }
             }
-            // try {
-            // Thread.sleep(200);
-            // } catch (Exception ignored) {
-            // }
         }
         System.out.println(Thread.currentThread().getName() + " Has " + visitedLinks.size() + " Unique Link");
     }

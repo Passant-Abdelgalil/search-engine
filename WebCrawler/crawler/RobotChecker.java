@@ -1,4 +1,4 @@
-package mtWebCrawler;
+package crawler;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -8,12 +8,11 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
+import java.util.regex.Pattern;
 
 public class RobotChecker {
 
@@ -104,7 +103,7 @@ public class RobotChecker {
 
         // reading the response
         int status = connection.getResponseCode();
-        if (status > 299) {
+        if (status > 399) {
             System.out.println("Request Failed!");
             return null;
         }
@@ -121,21 +120,22 @@ public class RobotChecker {
         }
     }
 
-    public boolean isAllowed(String url) {
+    public boolean isAllowed(String urlString) {
 
         String host = ""; // get host name from the url
         String protocol = "";
         try {
-            host = new URL(url).getHost();
-            protocol = new URL(url).getProtocol();
+            URL url = new URL(urlString);
+            host = url.getHost();
+            protocol = url.getProtocol();
             host = host.replace("www.", "");
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             return false;
         }
         if (host.equals("")) { // invalid url, couldn't extract host name >> return false
             return false;
         }
-        ArrayList<String> directories = new ArrayList<>();
+        ArrayList<String> directories;
         if (!robotRules.containsKey(host)) {
             try {
                 System.out.println("Getting Rules...");
@@ -147,12 +147,10 @@ public class RobotChecker {
             }
         }
         try {
-        directories = robotRules.get(host).disAllowedURLs;
-
-
+            directories = robotRules.get(host).disAllowedURLs;
             for (String pattern : directories) {
                 Pattern p = Pattern.compile(pattern);
-                Matcher m = p.matcher(url);
+                Matcher m = p.matcher(urlString);
                 if (m.matches()) { // if the url contains a disallowed directory >> return false
                     return false;
                 }
@@ -166,6 +164,7 @@ public class RobotChecker {
 
 
     private String processPatterns(String directory) {
+        directory = directory.replaceAll("/$", "");
         directory = directory.replaceAll("\\*", ".*"); // replace '*' with '.*' to meet any char any number of times
         return ".*" + directory + ".*"; // wrap the directory with .* to search for it anywhere in the url
     }

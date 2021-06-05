@@ -1,18 +1,12 @@
-package mtWebCrawler;
+package crawler;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
-class FileFilling {
-
+public class FileFilling {
     ArrayList<String> visitedLinks = new ArrayList<String>(); // el mfrood a7ot synch 3ala di, wl file, wl level
     // n7ot impl. el crawl f class? wlla class
     // FileFilling

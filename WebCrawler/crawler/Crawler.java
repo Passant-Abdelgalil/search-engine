@@ -1,13 +1,12 @@
-package mtWebCrawler;
+package crawler;
 
 import java.util.ArrayList;
 
-public class mtCrawler {
+public class Crawler{
     BFSNeighbourList bfsQueue;
     RobotChecker rc;
 
-    public mtCrawler() {
-        /*                                          Seeds                                               */
+    public Crawler() {
         ArrayList<String> seed = new ArrayList<String>();
         seed.add("https://en.wikipedia.org/wiki/Main_Page");
         seed.add("https://stackoverflow.com/questions/");
@@ -16,17 +15,12 @@ public class mtCrawler {
         seed.add("https://www.bbc.com/news/world");
 
 
-/*        FileFilling seedfile = new FileFilling("seedsFile.txt");
-        FileFilling.fileCreating();
-*/
         FileFilling urlFile = new FileFilling("urlsFile.txt");
         urlFile.fileCreating();
-        //FileFilling.fileWriterCreation();
         urlFile.fileWriterCreation();
 
 
         bfsQueue = new BFSNeighbourList(seed, urlFile, new URINormalizer()); //lazem da ya5od el seed
-        //bfsQueue.bfs(bfsQueue.getQTop()); da f class el WebCrawler(one crawler (thread))
         rc = new RobotChecker();
     }
 

@@ -1,28 +1,21 @@
-package mtWebCrawler;
-
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-
-import org.jsoup.Jsoup;
 import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import mtWebCrawler.BFSNeighbourList.urlObj;
+
+import java.io.IOException;
 
 public class WebCrawler implements Runnable {
 
     private final Thread thread;
     private final int ID;
-    public RobotChecker robotChecker;
     boolean stopCrawling = false;
     BFSNeighbourList bfsQueue;
 
-    public WebCrawler(BFSNeighbourList bfsQueue, int num, RobotChecker checker) {
+    public WebCrawler(BFSNeighbourList bfsQueue, int num) {
         // Create a thread with necessary variables
         ID = num;
         this.bfsQueue = bfsQueue;
-        this.robotChecker = checker;
         thread = new Thread(this);
 
         thread.start();
@@ -36,7 +29,7 @@ public class WebCrawler implements Runnable {
     private void crawl() { // level init =1 LineinFile init=1
         while (true) {
 
-            urlObj top = null;
+            BFSNeighbourList.urlObj top = null;
             Document doc = null;
             // Check the stopping criteria
             synchronized (this.bfsQueue) {
@@ -44,8 +37,7 @@ public class WebCrawler implements Runnable {
                     stopCrawling = true;
                 } else {
                     top = bfsQueue.getQTop();
-                    if (top != null)
-                        System.out.println(getThread().getName() + "-> " + top.url);
+
                 }
             }
             // Crawling Logic
@@ -53,22 +45,24 @@ public class WebCrawler implements Runnable {
                 // Check HTML Documents
                 if (top != null)
                     doc = request(top.url);
-                // If the url is for HTML document, crawl it
                 if (doc != null) {
-                    if (!doc.documentType().name().equals("html"))
+                    if (!doc.documentType().name().equals("html")) {
+                        System.out.println(doc.documentType().name());
                         continue;
+                    }
+                    System.out.println(getThread().getName() + "-> " + top.url);
                     System.out.println("Thread " + getThread().getName() + " will crawl " + doc.select("a[href]").size()
                             + " link");
                     for (Element link : doc.select("a[href]")) {
                         String next_link = link.absUrl("href");
-                        // if (robotChecker.isAllowed(next_link)) {
-                        top.addneighbours(new urlObj(next_link));
-                        // }
+                        top.addneighbours(new BFSNeighbourList.urlObj(next_link));
                     }
                     System.out.println(getThread().getName() + " will write to file");
                     synchronized (this.bfsQueue) {
                         bfsQueue.bfs(top);
                     }
+                }else{
+                    System.out.println("Empty document");
                 }
             } else {
                 break;

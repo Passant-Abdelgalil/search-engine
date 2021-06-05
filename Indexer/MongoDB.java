@@ -28,7 +28,7 @@ public class MongoDB {
         test = database.getCollection("test5");
         ReadFromFile();
 
-        Stream<String> htmlUrlsSplitted = Files.lines(Paths.get("C:\\Users\\Raghod\\IdeaProjects\\indexer\\src\\main\\java\\input.txt"));
+        Stream<String> htmlUrlsSplitted = Files.lines(Paths.get("Indexer/input.txt"));
         String[] URLarry = htmlUrlsSplitted.toArray(String[]::new);
        for (int i = 0; i < URLarry.length; i++) {
             String URL=URLarry[i];
@@ -89,7 +89,7 @@ public class MongoDB {
     private static void ReadFromFile() {
         LineNumberReader reader =null;
         try {
-            reader = new LineNumberReader(new FileReader(new File("C:\\Users\\Raghod\\IdeaProjects\\indexer\\src\\main\\java\\ignoredWords.txt")));
+            reader = new LineNumberReader(new FileReader(new File("Indexer/ignoredWords.txt")));
             String str;
             while ((str=reader.readLine()) != null) //read file till the end
             {

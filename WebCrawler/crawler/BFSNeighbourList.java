@@ -1,18 +1,13 @@
-package Crawler;
+package crawler;
 
-import java.io.IOException;
 import java.util.*;
-import java.net.URI;
-import org.jsoup.Jsoup;
-import org.jsoup.Connection;
-import org.jsoup.nodes.Document;
 
 public class BFSNeighbourList {
     FileFilling seedsFile;
     FileFilling urlsFile;
     ArrayList<String> seed;
     urlObj element;
-    int count = 0;
+    long count = 0;
     URINormalizer normalizer;
     ArrayList<String> visitedLinks = new ArrayList<String>();
 
@@ -60,10 +55,24 @@ public class BFSNeighbourList {
         this.seed = seed;
         this.urlsFile = urlsFile;
 
-        for (int i = 0; i < 5; i++) {
-            queue.add(new urlObj(seed.get(i)));
+        if (urlsFile.isFileEmpty()) {
+            for (int i = 0; i < 5; i++) {
+                queue.add(new urlObj(seed.get(i)));
+            }
+            System.out.println("Queue filled with seeds");
+        } else {
+            long numLines = urlsFile.numLinesInFile();
+            String lastUrlInFile = urlsFile.ReadFromFile(numLines - 1);
+            queue.add(new urlObj(lastUrlInFile));
+            for (long i = 0; i <= numLines - 1; i++) {
+                String u = urlsFile.ReadFromFile(i);
+                visitedLinks.add(u);
+            }
+
+            count = numLines;
+            urlsFile.closeFis();
         }
-        System.out.println("Queue filled with seeds");
+
     }
 
     public synchronized urlObj getQTop() {
@@ -74,26 +83,40 @@ public class BFSNeighbourList {
     }
 
     public synchronized void bfs(urlObj node) {
+        // node.visited = true;
         // normalized
-        String normalized = normalizer.normalizePreservedSemantics(node.url);
-        normalized = normalizer.normalizeSemantics(normalized);
+         String normalized = normalizer.normalizePreservedSemantics(node.url);
+         normalized = normalizer.normalizeSemantics(normalized);
+
 
         if (!visitedLinks.contains(normalized)) {
             visitedLinks.add(normalized);
             count++;
-            urlsFile.WriteToFile(node.url);
+            if(count<=5000)
+                urlsFile.WriteToFile(node.url);
+            System.out.println("count of urls = " + count);
         }
         List<urlObj> neighbours = node.getNeighbours();
-        for (urlObj url : neighbours) {
-            if (count >= 5000) break;
-            normalized = normalizer.normalizePreservedSemantics(url.url);
-            normalized = normalizer.normalizeSemantics(normalized);
+        for (urlObj urlo : neighbours) {
+            if (count >= 5000)
+                break;
+             normalized = normalizer.normalizePreservedSemantics(urlo.url);
+             normalized = normalizer.normalizeSemantics(normalized);
+
+            // if (!visitedLinks.contains(normalized)) {
             if (!visitedLinks.contains(normalized)) {
-                queue.add(url);
-                visitedLinks.add(normalized);
+                queue.add(urlo);
+                // visitedLinks.add(normalized);
+                // count++;
+                // urlsFile.WriteToFile(url.url);
             }
+            // try {
+            // Thread.sleep(200);
+            // } catch (Exception ignored) {
+            // }
         }
-        System.out.println(Thread.currentThread().getName()+" Has " + visitedLinks.size() + " Unique Link");
+        System.out.println(Thread.currentThread().getName() + " Has " + visitedLinks.size() + " Unique Link");
     }
+
 
 }

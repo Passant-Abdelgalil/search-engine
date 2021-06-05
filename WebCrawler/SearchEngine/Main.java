@@ -1,11 +1,9 @@
-package mtWebCrawler;
+package SearchEngine;
+import crawler.Crawler;
 
 public class Main {
-
     public static void main(String[] args) {
-
-        mtCrawler mtc = new mtCrawler();
+        Crawler mtc = new Crawler();
         mtc.crawl(4);
-
     }
 }
