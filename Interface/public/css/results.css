@@ -1,12 +1,31 @@
 body{
     font-family: 'Lemonada', cursive;
-    background-image: url("../images/background_simple_001.jpg");
+    background-image: url("../images/1687881.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    justify-content: center;
+    /* justify-content: center; */
 }
+.footer{
+    text-align: center;
+}
+table.center {
+    margin-left: auto; 
+    margin-right: auto;
+  }
+
+table
+{
+    margin-top: 450px;
+}
+
+th{
+padding: 10px;
+}
+
+
+
 #result {
     position: absolute;
     width: 100%;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title><%= title %></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel='stylesheet' href='/css/results.css' />
+ </head>
+ <body >
+    
+<div class="container" style="width:900px; margin-top:50px;">
+   <h4 align="left" class="display-1">RAPR Search Engine</h4>
+    
+   <br /><br />
+   
+   <form action="/results" method="post">
+        <div align="left" class="input-group mb-3">
+        
+            <input type="text" name="wordName" id="search" placeholder="Search RAPR" class="form-control" aria-label="Search RAPR" aria-describedby="icon" />
+            <button type="submit" class="input-group-text" id="icon"><img src="https://img.icons8.com/nolan/25/search.png"/></button>
+        
+        </div>
+        
+        <ul class="list-group" id="result">  
+            <% var i=NoPage * 10;  %>    
+            <% while (i<(NoPage * 10)+10 && i < pages.length) {%>
+                <div>
+                    <li>
+                        <p><%=pages[i].URL%></p>
+                        <a href="<%=pages[i].URL%>"><h2><%= pages[i].title %></h2></a>
+                        <% for (var j=0; j < pages[i].Sentance.length; j++) {%>
+                            <p><%= pages[i].Sentance[j] %></p>
+                        <% } %>
+                    </li>
+                </div>
+                <br />
+            <% i++; } %>
+        
+        </ul>
+</div>
+   <div class="footer">
+    <table>
+        <tr>
+        <% for(var y=0; y<Math.ceil((pages.length/10)); y++)  { %>
+            
+            <th><h1><a href="/results/<%=word.Word%>/<%=y%>"><%=y+1%></a></h1></th>
+        <% } %>
+        </tr>
+    </table>
+   </div>
+
+
+</form>
+ </body>
+</html>
+

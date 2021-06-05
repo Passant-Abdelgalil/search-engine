@@ -10,8 +10,8 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/', async(req, res) => {
-
-    res.redirect('/results/' + req.body.wordName);
+ 
+    res.redirect('/results/' + req.body.wordName +'/'+ 0);
 
 });
 
