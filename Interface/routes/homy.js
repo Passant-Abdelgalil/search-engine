@@ -10,9 +10,9 @@ router.get('/', async(req, res) => {
 });
 
 router.post('/', async(req, res) => {
- 
+    
+    console.log("req.body.wordName: ",req.body.wordName);
     res.redirect('/results/' + req.body.wordName +'/'+ 0);
-
 });
 
-module.exports = router;
+module.exports = router; 
