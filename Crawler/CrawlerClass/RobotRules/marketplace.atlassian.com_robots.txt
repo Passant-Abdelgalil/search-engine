@@ -1,0 +1,12 @@
+.*/login.*
+.*/server.*
+.*/rest.*
+.*/download.*
+.*/admin.*
+.*/manage.*
+.*/login.*
+.*/server.*
+.*/rest.*
+.*/download.*
+.*/admin.*
+.*/manage.*

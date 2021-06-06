@@ -1,0 +1,3 @@
+.*/linegraph      # disallow this directory.*
+.*/barchartData.*
+.*/.*checklist.*

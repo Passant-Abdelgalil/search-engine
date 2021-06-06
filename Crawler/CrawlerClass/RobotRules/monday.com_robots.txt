@@ -1,0 +1,14 @@
+.*/mb.*
+.*/h.*
+.*/fb.*
+.*/lp.*
+.*/test.*
+.*/partners.*
+.*/google.*.*
+.*/partials.*
+.*/blog/cards.*
+.*/blog/decks.*
+.*/blog/members.*
+.*/blog/forums.*
+.*/blog/blue-tracker.*
+.*/blog/packs.*

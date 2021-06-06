@@ -1,0 +1,2 @@
+.*/~guido/orlijn.*
+.*/webstats.*

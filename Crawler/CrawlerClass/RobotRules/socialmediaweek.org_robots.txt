@@ -1,0 +1,6 @@
+.*/blog/event.*
+.*/blog/smw_speaker.*
+.*/blog/smw_city.*
+.*/blog/smw_venue.*
+.*/blog/smw_conference.*
+.*/imps.*

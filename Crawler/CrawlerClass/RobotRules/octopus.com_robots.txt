@@ -1,0 +1,4 @@
+.*/purchase.*
+.*/github-students.*
+.*/purchase.*
+.*/github-students.*

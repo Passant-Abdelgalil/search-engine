@@ -1,0 +1,6 @@
+.*/seller/pdfs.*
+.*/view.*
+.*/error/purchases.*
+.*/api.*
+.*/cws.*
+.*/inapp.*

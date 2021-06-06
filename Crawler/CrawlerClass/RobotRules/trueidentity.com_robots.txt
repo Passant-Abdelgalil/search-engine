@@ -1,0 +1,16 @@
+.*https://membership.trueidentity.com/tucm.*
+.*https://membership.trueidentity.com/tucm/creditReport_Comparison.page.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=FAQs.*
+.*https://membership.trueidentity.com/tucm/support.page.*
+.*https://membership.trueidentity.com/tucm/orderStep1_form.page.*
+.*https://membership.trueidentity.com/tucm/identityProtection.page.*
+.*https://membership.trueidentity.com/tucm/cancelMembership.page.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=security.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=Legal.*
+.*https://membership.trueidentity.com/tucm/login.page.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=privacy.*
+.*https://membership.trueidentity.com/tucm/creditReport_TUCM.page.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=Contact.*
+.*https://membership.trueidentity.com/tucm/support.page?panel=terms	.*
+.*https://membership.trueidentity.com/tucm/creditReport_3BCR.page.*
+.*/survey-thank-you.*

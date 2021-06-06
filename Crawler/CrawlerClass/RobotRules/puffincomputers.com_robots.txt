@@ -1,0 +1,6 @@
+.*/wp-admin.*
+.*/wp-includes.*
+.*/blog.*
+.*/our-friends.*
+.*/tag.*
+.*/category.*

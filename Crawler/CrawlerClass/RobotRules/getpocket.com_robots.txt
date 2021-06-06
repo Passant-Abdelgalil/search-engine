@@ -1,0 +1,11 @@
+.*/v2/.*.*
+.*/v3/.*.*
+.*/create.*.*
+.*/mini_login.*.*
+.*/button.*.*
+.*/addemail.*.*
+.*/redirect.*.*
+.*/email_unsubscribe.*.*
+.*/firefox/new_tab_learn_more.*.*
+.*/edit.*.*
+.*/save.*.*

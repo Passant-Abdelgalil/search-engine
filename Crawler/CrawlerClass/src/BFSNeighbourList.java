@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class BFSNeighbourList {
@@ -64,7 +65,14 @@ public class BFSNeighbourList {
             queue.add(new urlObj(lastUrlInFile));
             for (long i = 0; i <= numLines - 1; i++) {
                 String u = urlsFile.ReadFromFile(i);
-                visitedLinks.add(u);
+                String normalized = normalizer.normalizePreservedSemantics(u);
+                normalized = normalizer.normalizeSemantics(normalized);
+                visitedLinks.add(normalized);
+            }
+            try {
+                RobotChecker.loadRules(robot);
+            } catch (FileNotFoundException e) {
+                //e.printStackTrace();
             }
             System.out.println("Queue filled with seeds");
             count = numLines;
@@ -81,6 +89,7 @@ public class BFSNeighbourList {
     }
 
     public synchronized void bfs(urlObj node) {
+        System.out.println(Thread.currentThread().getName()+" is writing to the file");
         String normalized;
         if(robotChecker.isAllowed(node.url)) {
             normalized = normalizer.normalizePreservedSemantics(node.url);
@@ -91,9 +100,14 @@ public class BFSNeighbourList {
                 count++;
                 if (count <= 5000)
                     urlsFile.WriteToFile(node.url);
+                else
+                    return;
                 System.out.println("count of urls = " + count);
+            }else {
+
             }
         }
+
         List<urlObj> neighbours = node.getNeighbours();
         for (urlObj urlo : neighbours) {
             if (count >= 5000)
@@ -104,11 +118,11 @@ public class BFSNeighbourList {
 
                 if (!visitedLinks.contains(normalized)) {
                     queue.add(urlo);
-
                 }
+            }else{
+            System.out.println("not allowed");
             }
         }
-        System.out.println(Thread.currentThread().getName() + " Has " + visitedLinks.size() + " Unique Link");
+        System.out.println("OUT");
     }
-
 }

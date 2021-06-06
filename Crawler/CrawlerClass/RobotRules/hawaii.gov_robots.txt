@@ -1,0 +1,15 @@
+.*/hrd/guide.*
+.*/hrd/rsvd.*
+.*/icsd/dags/inventory.*
+.*/ers.*
+.*/hawaii-state-govt.*
+.*/doh/air-quality.*
+.*/junk.*
+.*/about.*
+.*/index.*
+.*/ag/portal_memberdata.*
+.*/ag/Members.*
+.*/ag/mcch/missingchild.*
+.*/dcca/survey.*
+.*/spo/training-procurement-personnel.*
+.*/gov.*

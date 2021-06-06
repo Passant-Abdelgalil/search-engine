@@ -1,0 +1,6 @@
+.*/ECID.*
+.*/id16.*
+.*/id12.*
+.*/INTCID.*
+.*/INTNAV.*
+.*/amp;INTNAV.*

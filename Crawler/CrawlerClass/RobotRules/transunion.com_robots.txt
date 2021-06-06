@@ -1,0 +1,93 @@
+.*/ppc-credit-report.page.*
+.*/ppc-credit-report-495-3.page.*
+.*/ppc-credit-report-495-2.page.*
+.*/ppc-credit-report-495.page.*
+.*/ppc-credit-check.page.*
+.*/ppc-credit-report-495-InstantAlert.*
+.*/marketing/home-alt.*
+.*/marketing/3bcr.*
+.*/marketing/ppc-comparison.*
+.*/customer-support/consumer-contact-test.*
+.*/marketing/fbdladnpd .*
+.*/marketing/fbdladnt1 .*
+.*/customer-support/service-agreement.*
+.*/ppc-credit-report-mobile.*
+.*/marketing/ppc-credit-report-3-8mm-mobile .*
+.*/marketing/ppc-fitbit.*
+.*/customer-support/tucm/service-agreement.*
+.*/ppc-995.*
+.*/ppc-animated-text-pc .*
+.*/customer-support/TestContact.page.*
+.*/article/QuinStreetSample.page.*
+.*/marketing/buy-tucm .*
+.*/product/transunion-credit-protection-email.*
+.*/product/credit-lock-email .*
+.*/product/score-simulator-email .*
+.*/cubs.*
+.*/ppc-halloween-bl.*
+.*/ppc-halloween-wh.*
+.*/ppc-halloween-cat.*
+.*/product/credit-lock-email.*
+.*/mississippi.*
+.*/ppc-mobile-with-form .*
+.*/personal-credit/affiliate-landing .*
+.*/order-forms-connectivity-test .*
+.*/OrderForms/order-forms.*
+.*/order-form.*
+.*/home-fintech.*
+.*/equifaxhighvolume.*
+.*/product-features.*
+.*/legal/bill-of-rights.*
+.*/resources/transunion/doc/linkedin/TransUnion-Healthcare-Patient-Survey-2017.pdf .*
+.*/resources/transunion/doc/linkedin/TransUnion-Millennial-Study-Campaign-Report-2017.pdf .*
+.*/lp/facebook-opt-out.*
+.*/landing3.*
+.*/resources/transunion/doc/campaign.*
+.*/lp.*
+.*/events.*
+.*/vanity_redirects.*
+.*/test.*
+.*/resources/transunion/doc/social.*
+.*/survey-thank-you.*
+.*/lp/pulse-test.*
+.*/customer-support/sa-contact.*
+.*/customer-support/ca-contact.*
+.*/customer-support/usa-contact.*
+.*/onlineinquiry.*
+.*/credit-disputes/credit-disputes.*
+.*/credit-disputes/credit-disputes-faq.*
+.*/credit-freeze/home-llt.*
+.*/credit-freeze/iw-runtime/freeze.*
+.*/iw-runtime/freeze.*
+.*/credit-freeze/place-credit-freeze.*
+.*/credit-freeze/lock-vs-freeze.*
+.*/credit-freeze/main.*
+.*/credit-freeze/credit-freeze-faq.*
+.*/iw-runtime/freeze.*
+.*/customer-support/third-party-help.*
+.*/customer-support/editing-personal-information.*
+.*/customer-support/support.*
+.*/customer-support/customer-support/support-options.*
+.*/certerror.*
+.*/abm.*
+.*/credit-disputes/disputes-new.*
+.*/credit-disputes/disputes-new-c.*
+.*/credit-disputes/disputes-new-d.*
+.*/credit-disputes/credit-inquiries.*
+.*/credit-disputes/credit-scores.*
+.*/credit-disputes/personal-information.*
+.*/credit-disputes/accounts.*
+.*/home-story.*
+.*/customer-support/social-media-contact.*
+.*/credit-wellness.*
+.*/businessContactFormTest.*
+.*/solution/digital-marketing.*
+.*/customer-support/support-tucm.*
+.*/savings/pl-test.*
+.*/feedback.*
+.*/1.*
+.*/2.*
+.*/3.*
+.*/home-sweet-home .*
+.*/home-upside-down  .*
+.*/test/new-freeze .*

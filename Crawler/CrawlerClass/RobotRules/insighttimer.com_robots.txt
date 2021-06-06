@@ -1,0 +1,16 @@
+.*/devweb/.*.*
+.*/mediaplay/.*.*
+.*/groups/.*.*
+.*/meditation-benefits/.*.*
+.*/meditation-origins/.*.*
+.*/meditation-practices/.*.*
+.*/meditation-music/.*.*
+.*/play/.*.*
+.*/terms.*
+.*/privacy.*
+.*/privacypolicy.*
+.*/privacypolicy_separate.*
+.*/manage-subscription/.*.*
+.*/my-bookmarks.*
+.*/my-playlists.*
+.*/my-profile.*

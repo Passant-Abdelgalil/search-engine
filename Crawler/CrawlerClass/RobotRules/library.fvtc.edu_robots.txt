@@ -1,0 +1,6 @@
+.*/er.php.*
+.*/err.php.*
+.*/go.php.*
+.*/friendly.php.*
+.*/ld.php.*
+.*/srch.php.*

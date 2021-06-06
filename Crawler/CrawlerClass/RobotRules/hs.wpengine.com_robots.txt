@@ -1,0 +1,2 @@
+.*/_hcms/preview.*
+.*/hs/manage-preferences.*

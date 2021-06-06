@@ -1,0 +1,6 @@
+.*/familylink-earlyaccess.*
+.*/graduation.*
+.*/join.*
+.*/supervision/coexistence.*
+.*/supervision/setup.*
+.*/webcreation.*

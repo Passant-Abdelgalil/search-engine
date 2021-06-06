@@ -1,0 +1,4 @@
+.*/search.*
+.*/wp-admin.*
+.*/search.*
+.*/wp-admin.*

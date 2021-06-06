@@ -1,0 +1,3 @@
+.*/express_get_started.*.*
+.*/contribute/thanks.*.*
+.*/pending_entities/v2/new.*.*

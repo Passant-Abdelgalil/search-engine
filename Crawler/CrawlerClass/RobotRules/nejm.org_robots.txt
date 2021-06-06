@@ -1,0 +1,12 @@
+.*/action.*
+.*/help.*
+.*/search.*
+.*/feedback.*
+.*/rss.*
+.*/action/clickThrough.*
+.*/action/showLogin.*
+.*/page/account-confirmation-thanks.*
+.*/media.*
+.*/servlet/linkout.*
+.*/author.*
+.*/doi/mlt.*

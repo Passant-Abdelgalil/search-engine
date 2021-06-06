@@ -1,0 +1,17 @@
+.*/activate.*
+.*/beta.*
+.*/cancel.*
+.*/csi_204.*
+.*/debug.*
+.*/error_204.*
+.*/library.*
+.*/live.*
+.*/login.*
+.*/logout.*
+.*/onboard.*
+.*/partners.*
+.*/search.*
+.*/settings.*
+.*/watch.*
+.*/youtubei.*
+.*/.*?onboard=.*

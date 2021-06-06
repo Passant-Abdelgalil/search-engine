@@ -1,0 +1,9 @@
+.*/assets/css.*
+.*/assets/images.*
+.*/assets/js.*
+.*/guide/samples.*
+.*/images.*
+.*/sdk/OLD_RELEASENOTES.*
+.*/sdk/RELEASENOTES.*
+.*/sdk/older_releases.*
+.*/shareables.*

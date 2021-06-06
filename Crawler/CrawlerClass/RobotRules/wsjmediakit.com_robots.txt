@@ -1,0 +1,2 @@
+.*/logos.*
+.*/wp-links-opml.php.*

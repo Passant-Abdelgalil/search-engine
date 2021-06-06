@@ -1,0 +1,3 @@
+.*/auth/v1/registerWebFb.*
+.*/shazam/v1.*
+.*/shazam/v3.*

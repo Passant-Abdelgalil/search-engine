@@ -1,0 +1,28 @@
+.*/account.*.*
+.* /_authoring.*
+.*/?cmpid=.*.*
+.*/?icid=.*.*
+.*/personalized-campaign.html .*
+.*/retargeted-campaign.html .*
+.*/anonymous-campaign.html.*
+.*/PartnerServices.aspx.* .*
+.*/shop/cart/ .*
+.*/popup/ .*
+.*/Templates/Popup.aspx?.* .*
+.*/shop/plans/Retail/ .*
+.*/system/sling/cqform/ .*
+.*/home.*
+.*/styleguide.*
+.*/offers/aN1217Lbp.html.*
+.*/offers/kN1024Cat.html.*
+.*/offer/alcatel-linkzone-modal.html.*
+.*/customer/TX-210-726-area-code-overlay-notification.html.*
+.*/business/model-repository/.*.*
+.*/content/t-mobile/consumer/_authoring/modules/hp/.*.*
+.*/content/t-mobile/consumer/_authoring/pages/deals/.*.*
+.*/foresee/.*.*
+.*/content/t-mobile.*
+.*/shop/addons/Services.*
+.*/templates/.*.*
+.*/orderstatus/.*.*
+.*/shop/AddOns/Accessories/.*.*

@@ -1,0 +1,6 @@
+.*.*.pdf$.*
+.*/landing_google.*
+.*/enterprise/landing_pages/google.*.*
+.*.*.pdf$.*
+.*/landing_google.*
+.*/enterprise/landing_pages/google.*.*

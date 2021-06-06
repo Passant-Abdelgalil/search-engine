@@ -1,0 +1,9 @@
+.*/wp-admin.*
+.*/wp-signup.php.*
+.*/press-this.php.*
+.*/remote-login.php.*
+.*/activate.*
+.*/cgi-bin.*
+.*/mshots/v1.*
+.*/next.*
+.*/public.api.*

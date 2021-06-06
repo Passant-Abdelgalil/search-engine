@@ -1,0 +1,6 @@
+.*/support/copy-link.*
+.*/.*/support/copy-link.*
+.*/reviews/mark-inappropriate.modal.*
+.*/.*/reviews/mark-inappropriate.modal.*
+.*/social/social_modal_.*.*
+.*/.*/social/social_modal_.*.*

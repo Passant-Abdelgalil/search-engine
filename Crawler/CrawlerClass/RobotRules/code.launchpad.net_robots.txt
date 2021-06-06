@@ -1,0 +1,4 @@
+.*/api.*
+.*/+loggerhead.*
+.*/.*utouch.*.*
+.*/ubuntu/+source/utouch.*.*

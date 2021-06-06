@@ -1,0 +1,11 @@
+.*.*/search.*
+.*.*/tag.*
+.*/.*/price-comparison.*
+.*/.*/specification.*
+.*/.*searchTerm.*
+.*/.*sortBy.*
+.*/.*productBrand.*
+.*/deals/compare.*
+.*/.*/deals/compare.*
+.*.*jwsource=.*.*
+.*.*region-switch=.*.*

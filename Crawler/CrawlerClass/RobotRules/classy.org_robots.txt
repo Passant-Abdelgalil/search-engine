@@ -1,0 +1,13 @@
+.*/profile.*
+.*/elemental.*
+.*/tailgate.*
+.*/firerun.*
+.*/campaigns.*
+.*/api.*
+.*/ckeditor.*
+.*/scripts/ckfinder.*
+.*/tickets.*
+.*/member.*
+.*/search.*
+.*/charity/classyorg/c25190.*
+.*/give/175494.*

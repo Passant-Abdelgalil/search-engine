@@ -1,0 +1,6 @@
+.*/accounts/ClientAuth.*
+.*/accounts/ClientLogin.*
+.*/AccountDisavow?.*
+.*/ClientAuth.*
+.*/ClientLogin.*
+.*/ReportBug.*

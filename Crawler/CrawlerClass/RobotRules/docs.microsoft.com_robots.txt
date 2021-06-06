@@ -1,0 +1,12 @@
+.*/.*/answers/accounts.*
+.*/.*/answers/users.*
+.*/.*/answers/revisions.*
+.*/.*/answers/search.*
+.*/.*/answers/.*sort=newest.*
+.*/.*/answers/.*sort=hottest.*
+.*/.*/answers/.*sort=votes.*
+.*/.*/answers/commands.*
+.*/.*/answers/badges.*
+.*/.*/answers/comments.*
+.*/.*/opbuildpdf.*
+.*/.*/search/?.*terms.*

@@ -1,0 +1,9 @@
+.*/?hl=.*&.*
+.*/templateabuse.*
+.*.*
+.*/?hl=.*&.*
+.*/templateabuse.*
+.*.*
+.*/?hl=.*&.*
+.*/templateabuse.*
+.*.*

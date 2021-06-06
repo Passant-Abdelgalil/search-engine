@@ -1,0 +1,4 @@
+.*/search.*
+.*/guide_template.*
+.*/archive.*
+.*.*.pdf.*

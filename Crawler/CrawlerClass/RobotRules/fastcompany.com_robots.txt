@@ -1,0 +1,5 @@
+.*/multisite_files/fastcompany/imagecache.*
+.*/admin.*
+.*/4160.*
+.*/bookclub.*
+.*/search.*.*

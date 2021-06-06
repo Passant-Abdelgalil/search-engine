@@ -1,0 +1,4 @@
+.*/me/playlists.*
+.*/me/settings.*
+.*/me/favorite.*
+.*/api.*

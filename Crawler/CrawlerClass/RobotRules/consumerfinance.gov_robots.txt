@@ -1,0 +1,15 @@
+.*/save-hud-counselors-list.*
+.*/about-us/the-bureau/leadership-calendar/pdf.*
+.*/es/obtener-respuestas/.*.imprimir.html.*
+.*/external-site.*
+.*/.*?success.*
+.*.*form-id=.*.*
+.*/?page=.*
+.*/hud-api-replace.*
+.*/yourstory.*
+.*/ask-cfpb/search.*
+.*/ask-cfpb/search-by-tag.*
+.*/askcfpb/search.*
+.*/es/obtener-respuestas/buscar.*
+.*/es/obtener-respuestas/buscar-por-etiqueta.*
+.*/consumer-tools/educator-tools/youth-financial-education/curriculum-review/tool/.*.*

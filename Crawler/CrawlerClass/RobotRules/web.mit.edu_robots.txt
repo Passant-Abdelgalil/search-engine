@@ -1,0 +1,9 @@
+.*/afs.*
+.*/cgi-bin.*
+.*/user.*
+.*/org.*
+.*/activity.*
+.*/contrib.*
+.*/dept.*
+.*/software.*
+.*/bin.*

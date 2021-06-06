@@ -9,6 +9,7 @@ public class URINormalizer {
     URINormalizer() { }
 
     public String normalizePreservedSemantics(String url) {
+        url = url.replaceAll("www.", "");
         /* 1. UPPERCASE  percent-encoded triplets */
         Pattern pattern = Pattern.compile("%[0-9]*[a-z]*");
         Matcher matcher = pattern.matcher(url);
@@ -26,6 +27,7 @@ public class URINormalizer {
         url = url.replaceAll("\\/\\.+\\/", "/");
 
         /* 5. Remove / at the end of url */
+        url = url.replaceAll("#$", "");
         url = url.replaceAll("/$", "");
 
         /* 6. Remove Default port*/
@@ -65,7 +67,7 @@ public class URINormalizer {
             url = sortQueryParameters(url);
         } catch (MalformedURLException e) {
         }
-
+        url = url.replaceAll("/$ ","");
         return url;
     }
 

@@ -1,0 +1,5 @@
+.*/member.*
+.*/test.*
+.*/dev.*
+.*/staging.*
+.*/guidelines.*

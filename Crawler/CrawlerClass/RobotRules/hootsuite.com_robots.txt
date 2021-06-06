@@ -1,0 +1,17 @@
+.*.*d=pro.*.*
+.*/dashboard.*.*
+.*/signup.*.*
+.*/feed.*.*
+.*/login.*.*
+.*/hootlet/social-share.*.*
+.*/hootlet/load.*.*
+.*/social-connect/send.*.*
+.*/share-button.*.*
+.*/app/social-network/.*.*
+.*/ajax.*.*
+.*/sso-redirect.*.*
+.*/js.*.*
+.*/craft.*
+.*/.*.pdf$.*
+.*/billing.*
+.*/create-free-account.*.*
