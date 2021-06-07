@@ -53,3 +53,7 @@ and Stem Folder in [C:\]
 Visit [http://localhost/interface/index.php]
 
 and test it by search for one word
+
+![index](https://github.com/abeerhbadr/crawler-based-search-engine/blob/Interface/pic1.png?raw=true)
+
+![search](https://github.com/abeerhbadr/crawler-based-search-engine/blob/Interface/pic2.png?raw=true)
