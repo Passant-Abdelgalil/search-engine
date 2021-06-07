@@ -61,3 +61,27 @@ and test it by search for one word
 
 ![search](https://github.com/abeerhbadr/crawler-based-search-engine/blob/Interface/pic2.png?raw=true)
 
+## Crawler
+
+### Folder Structure
+Crawler
+└── CrawlerClass
+    └── src
+    |   └── BFSNeighboursList.java
+    |   ├── Crawler.java
+    |   ├── FileFilling.java
+    |   ├── RobotChecker.java
+    |   ├── URINormalizer.java
+    |   ├── WebCrawler.java
+    |   └── Main.java
+    | 
+    └── urlsFile.txt
+    
+### Run
+* From Terminal:
+NOTE: make sure to be inside the repo directory
+run following commands 
+* `cd cd Crawler/CrawlerClass/src`
+* `javac -cp jsoup-1.13.1.jar *.java`
+* `java -cp ".:./jsoup-1.13.1.jar" Main`
+This will start the crawler, you should see some debug messages to show the crawler state
