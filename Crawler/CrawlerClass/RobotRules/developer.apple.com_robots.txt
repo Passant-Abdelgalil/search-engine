@@ -1,0 +1,12 @@
+.*/click.*
+.*/cgi-bin.*
+.*/survey.*
+.*/temp.*
+.*/search.*
+.*/unsubscribe.*
+.*/reference.*
+.*/forums/create/question.*
+.*/forums/login.*
+.*/forums/preferences.*
+.*/forums/profile.*
+.*/forums/.*?view.*

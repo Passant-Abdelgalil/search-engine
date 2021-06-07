@@ -1,0 +1,14 @@
+.*/staticresources.*
+.*/investis.*
+.*/tools.*
+.*/investis modules.*
+.*/.*/sitecore.*
+.*/sitecore.*
+.*/.*/sitecore/content.*
+.*/sitecore/content.*
+.*/error-page.aspx.*
+.*/.*/error-page.aspx.*
+.*/favicon.ico.*
+.*/WebResource.axd.*
+.*/Webresource.axd.*
+.*/ScriptResource.axd.*

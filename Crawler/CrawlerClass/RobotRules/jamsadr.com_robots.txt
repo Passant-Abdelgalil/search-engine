@@ -1,0 +1,3 @@
+.*/files/Uploads/Documents/.*.*
+.*/_config/.*.*
+.*/blog/sitemap_search.aspx.*

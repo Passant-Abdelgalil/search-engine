@@ -1,0 +1,13 @@
+.*/googleresults.jsp.*
+.*/results.jsp.*
+.*/results-b.jsp.*
+.*/ns-results.jsp.*
+.*/w-results.jsp.*
+.*/s-results.jsp.*
+.*/results-travel.jsp.*
+.*/results-medical.jsp.*
+.*/tc-results.jsp.*
+.*/m-results.jsp.*
+.*/results-monster.jsp.*
+.*/emailAdCampaign.jsp.*
+.*/domainSearch.jsp.*

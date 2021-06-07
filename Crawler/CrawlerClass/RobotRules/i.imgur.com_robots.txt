@@ -1,0 +1,9 @@
+.*/account.*
+.*/delete.*
+.*/download.*
+.*/logout.*
+.*/removalrequest.*
+.*/search.*
+.*/1.*
+.*/2.*
+.*/3.*

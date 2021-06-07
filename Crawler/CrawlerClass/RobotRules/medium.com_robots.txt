@@ -1,0 +1,13 @@
+.*/m.*
+.*/me.*
+.*/@me$.*
+.*/@me.*
+.*/.*/edit$.*
+.*/.*/.*/edit$.*
+.*/media.*
+.*/p/.*/share.*
+.*/r.*
+.*/t.*
+.*/trending.*
+.*/search?q$.*
+.*/search?q=.*

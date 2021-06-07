@@ -1,0 +1,12 @@
+.*/new/.*.*
+.*/search?q.*.*
+.*/.*rid=.*.*
+.*/.*os=.*.*
+.*/.*location=.*.*
+.*/.*bucket=.*.*
+.*/.*browser=.*.*
+.*/.*source=.*.*
+.*/.*offset=.*.*
+.*/.*partner=.*.*
+.*/.*options[.*]=.*.*
+.*/.*limit=.*.*

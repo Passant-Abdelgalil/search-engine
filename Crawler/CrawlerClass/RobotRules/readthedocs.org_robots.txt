@@ -1,0 +1,4 @@
+.*/search.*
+.*/api.*
+.*/builds.*
+.*/sustainability/click.*

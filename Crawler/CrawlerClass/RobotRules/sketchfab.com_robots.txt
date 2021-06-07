@@ -1,0 +1,4 @@
+.*/admin.*.*
+.*/i/models/.*/views.*
+.*/models/.*/ar-redirect.*
+.*/i/models/.*/ar-redirect.*

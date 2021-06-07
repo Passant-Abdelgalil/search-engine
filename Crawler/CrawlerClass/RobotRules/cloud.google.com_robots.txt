@@ -1,0 +1,6 @@
+.*/billing/docs/support.*
+.*/bare-metal/subprocessors.html.*
+.*/console?.*getstarted=.*.*
+.*/_d/signin?continue=.*
+.*/.*?.*authuser=.*
+.*/landing.*

@@ -1,0 +1,7 @@
+.*/search?.*
+.*/list?.*
+.*/sign_in?.*
+.*/sign_up?.*
+.*?filters.*
+.*/.*comments.*
+.*/courses/4525143.*.*

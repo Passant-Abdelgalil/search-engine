@@ -1,0 +1,5 @@
+.*/api.*
+.*/portal/search.*
+.*/portal/collections/.*?.*.*
+.*/portal/.*/search.*
+.*/portal/.*/collections/.*?.*.*

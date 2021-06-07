@@ -1,0 +1,6 @@
+.*/simple.*
+.*/packages.*
+.*/_includes.*
+.*/pypi/.*/json.*
+.*/pypi/.*/.*/json.*
+.*/pypi.*?.*

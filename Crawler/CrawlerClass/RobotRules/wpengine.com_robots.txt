@@ -1,0 +1,5 @@
+.*/wp-admin.*
+.*/wp-json/wpe/v1/chat-group.*
+.*.*/.*/audio.*
+.*/wp-json/wpe/v1/opt-in.*
+.*/site.webmanifest.*

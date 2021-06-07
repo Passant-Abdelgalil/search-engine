@@ -1,0 +1,6 @@
+.*/messages.*
+.*/quickstart.*
+.*/go.*
+.*/unsub.*
+.*/answers.*
+.*/help/requests/new?app_id=.*.*

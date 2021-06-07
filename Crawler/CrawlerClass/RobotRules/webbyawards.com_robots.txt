@@ -1,0 +1,15 @@
+.*/wp-admin.*
+.*/wp-includes.*
+.*/readme.html.*
+.*/license.txt.*
+.*/xmlrpc.php.*
+.*/wp-login.php.*
+.*/wp-register.php.*
+.*/.*?.*.*
+.*/.*?.*
+.*/.*~.*.*
+.*/.*~.*
+.*/feed.*
+.*/feed/$.*
+.*/comments/feed.*
+.*/trackback.*

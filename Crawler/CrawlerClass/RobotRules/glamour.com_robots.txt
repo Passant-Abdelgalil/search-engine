@@ -1,0 +1,6 @@
+.*/user.*
+.*/m.*
+.*/preview.*
+.*/search?.*
+.*/search.*
+.*/video/right_rail.*.*

@@ -1,0 +1,11 @@
+.*/auth/.*.*
+.*/search.*.*
+.*/.*/followers.*
+.*/.*/following.*
+.*/.*/collections.*
+.*/.*/topics.*
+.*/.*/followed_collections.*
+.*/.*/submitted.*
+.*/my/.*.*
+.*/yours.*.*
+.*/notifications.*

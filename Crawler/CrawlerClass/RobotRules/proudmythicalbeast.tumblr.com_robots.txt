@@ -1,0 +1,4 @@
+.*/random.*
+.*/day.*
+.*/sticky-ad-iframe.html.*
+.*/privacy/consent.*

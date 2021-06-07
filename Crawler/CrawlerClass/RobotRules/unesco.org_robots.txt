@@ -1,0 +1,36 @@
+.*/iftc/ .*
+.*/rss/scripts.*
+.*/error.*
+.*/science/forum.*
+.*/education/forum.*
+.*/ulis/cgi-bin.*
+.*/moscow-new/ .*
+.*/ulis/cgi-bin.*
+.*/new/fr/tip-a-friend.*
+.*/new/en/tip-a-friend.*
+.*/new/es/tip-a-friend.*
+.*/pv_obj_cache.*
+.*/tools/filedepot.*
+.*/new/index.php?eID=tx_cms_showpic.*.*
+.*/archives/multimedia/extra.*
+.*/fileadmin/unesco.*
+.*/uploads.*
+.*/cms/ # Nothing to see here.*
+.*/t3lib/ # Nothing to see here.*
+.*/typo3/ # Nothing to see here.*
+.*/typo3conf/ # Nothing to see here.*
+.*/typo3temp/ # Nothing to see here.*
+.*/index.php?id=.* # Disable non-realurl.*
+.*/new/fileadmin/TEMPLATES/  # Exclude only folders with no link from frontend, like templates, css, js..*
+.*/new/fileadmin/unesco.*
+.*/new/fileadmin/NICE.*
+.*/new/uploads.*
+.*/new/cms/ # Nothing to see here.*
+.*/new/t3lib/ # Nothing to see here.*
+.*/new/typo3/ # Nothing to see here.*
+.*/new/typo3conf/ # Nothing to see here.*
+.*/new/typo3temp/ # Nothing to see here.*
+.*/new/index.php?id=.* # Disable non-realurl.*
+.*/new/en/media-services/for-the-press/all-news.*
+.*/mediabank/cgi.*
+.*/mediabank/views.*

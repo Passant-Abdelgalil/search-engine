@@ -1,0 +1,7 @@
+.*/profile.*.*
+.*/subscribe/confirm.*.*
+.*/subscribe/post.*.*
+.*/unsubscribe.*.*
+.*/track.*.*
+.*/survey.*.*
+.*/contact-form.*.*

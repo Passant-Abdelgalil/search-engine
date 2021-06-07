@@ -1,0 +1,8 @@
+.*/tools.*
+.*/checkout.*
+.*/download_check.*
+.*/cart.*
+.*/corpbanner.*
+.*/stream.*
+.*/api.*
+.*/.*_cb$.*

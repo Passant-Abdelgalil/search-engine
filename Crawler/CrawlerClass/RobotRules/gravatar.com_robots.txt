@@ -1,0 +1,8 @@
+.*/.*.json.*
+.*/.*.xml.*
+.*/.*.php.*
+.*/.*.vcf.*
+.*/.*.qr.*
+.*/accounts/activate/.*.*
+.*/accounts/force-by-email/.*.*
+.*/account.*

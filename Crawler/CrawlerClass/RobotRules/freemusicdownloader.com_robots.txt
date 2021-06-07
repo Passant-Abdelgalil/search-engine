@@ -1,0 +1,9 @@
+.*/note.*
+.*/search.php.*
+.*/click.php.*
+.*/search_caf.php.*
+.*/t.php.*
+.*/exitpage.*
+.*/popup.*
+.*/r.php.*
+.*/secondary_feed.*

@@ -1,0 +1,6 @@
+.*/wp-admin.*
+.*/search.*
+.*/?s=.*
+.*/wp-admin.*
+.*/search.*
+.*/?s=.*

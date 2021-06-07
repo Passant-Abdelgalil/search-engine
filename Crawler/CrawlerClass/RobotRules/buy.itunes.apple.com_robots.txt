@@ -1,0 +1,9 @@
+.*/WebObjects/MZFastFinance.woa.*
+.*/WebObjects/MZFinance.woa.*
+.*/WebObjects/MZPersonalizer.woa.*
+.*/WebObjects/MZStoreElements.woa.*
+.*/station/idst..*
+.*/WebObjects/.*.*
+.*/search.*.*
+.*/.*/rss/.*.*
+.*/.*/lookup?.*

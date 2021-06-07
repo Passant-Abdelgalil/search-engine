@@ -1,0 +1,8 @@
+.*/api.*
+.*/refer.*
+.*/find-solutions/app-instructions.*
+.*/find-solutions/app-instructions/spendlytics-app-download-instructions.*
+.*/find-solutions/app-instructions/spending-tracker-app-download-instructions.*
+.*/find-solutions/app-instructions/toshl-finance-app-download-instructions.*
+.*/find-solutions/app-instructions/toshl-finance-app-download.*
+.*/find-solutions/app-instructions/moneywise-app-download-instructions.*

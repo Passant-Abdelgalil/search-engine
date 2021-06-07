@@ -1,0 +1,10 @@
+.*/core.*
+.*/profiles.*
+.*/README.txt.*
+.*/web.config.*
+.*/comment/reply.*
+.*/filter/tips.*
+.*/search.*
+.*/index.php/comment/reply.*
+.*/index.php/filter/tips.*
+.*/index.php/search.*

@@ -1,0 +1,16 @@
+.*/my.*
+.*/admin.*
+.*/status.*
+.*/feeds/search.*.*
+.*/bookstore/search.*.*
+.*/.*.swf$.*
+.*/bookshow/cache.*
+.*/feeds/user.*.*
+.*/ebooks/editor.html.*
+.*/ebooks/reader.html.*
+.*/ebook-creator/editor.html.*
+.*/node/.*.*
+.*/bookstore/invited/.*.*
+.*/distribution/.*.*
+.*/search/.*.*
+.*/user.*

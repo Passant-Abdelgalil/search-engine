@@ -1,0 +1,10 @@
+.*/.*/about-us/contact/contact-spotify-password.*
+.*/.*/about-us/contact/contact-spotify-account.*
+.*/.*/get-spotify/.*.*
+.*/.*/xhr/.*.*
+.*/.*/external/.*.*
+.*/.*/legal/advertiser-terms-and-conditions.*
+.*/.*/account/csi/.*.*
+.*/.*/account/cls/.*.*
+.*/.*/starbuckspartners.*
+.*/starbuckspartners.*

@@ -1,0 +1,7 @@
+.*/.*/search.*
+.*/.*/apis.*
+.*/.*/api.*
+.*/.*/bin/search.py.*
+.*/bin/search.py.*
+.*/bin/search.go.*
+.*/.*/forum-attachment.*

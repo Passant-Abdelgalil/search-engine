@@ -1,0 +1,13 @@
+.*.*/format:thumbnail.*
+.*/download.*
+.*/.*/download?.*
+.*/couchmode.*
+.*/groups/.*/forum/.*.*
+.*/musicstore/preview.*
+.*/musicstore/download.*
+.*/forgot_password.*
+.*/help/forgot_login.*
+.*/help/verify_email.*
+.*/user/verify.*
+.*/search.*
+.*/_.*.*

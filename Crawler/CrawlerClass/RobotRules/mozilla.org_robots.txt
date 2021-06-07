@@ -1,0 +1,12 @@
+.*/.*/firstrun.*
+.*/.*/newsletter/existing.*
+.*/.*/whatsnew.*
+.*/.*/etc.*
+.*/.*/firstrun.*
+.*/.*/newsletter/existing.*
+.*/.*/whatsnew.*
+.*/.*/etc.*
+.*/.*/firstrun.*
+.*/.*/newsletter/existing.*
+.*/.*/whatsnew.*
+.*/.*/etc.*

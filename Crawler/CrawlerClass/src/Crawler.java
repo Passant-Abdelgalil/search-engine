@@ -6,12 +6,11 @@ public class Crawler{
 
     public Crawler() {
         ArrayList<String> seed = new ArrayList<String>();
-        seed.add("https://en.wikipedia.org/wiki/Main_Page");
-        seed.add("https://stackoverflow.com/questions/");
-        seed.add("https://stackexchange.com/");
-        seed.add("https://www.blurtit.com/topics");
-        seed.add("https://www.bbc.com/news/world");
-
+        seed.add("https://en.wikipedia.org/");
+        seed.add("https://stackoverflow.com");
+        seed.add("https://quora.com");
+        seed.add("https://reddit.com");
+        seed.add("https://geeksforgeeks.or");
 
         FileFilling urlFile = new FileFilling("urlsFile.txt");
         urlFile.fileCreating();

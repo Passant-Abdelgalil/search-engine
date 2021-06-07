@@ -1,0 +1,2 @@
+.*/wp-admin.*
+.*/external-affairs-division/ask-deq-customer-survey.*

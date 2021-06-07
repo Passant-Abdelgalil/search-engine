@@ -1,0 +1,3 @@
+.*/app/form/submit/.*.*
+.*/form/results/file/download/.*.*
+.*/app/form/result/token/.*.*

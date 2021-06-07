@@ -1,0 +1,4 @@
+.*/preview.*
+.*/.*receipt$.*
+.*/.*/tickets/$.*
+.*/.*/tickets/?.*

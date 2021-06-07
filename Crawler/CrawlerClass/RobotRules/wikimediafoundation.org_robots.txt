@@ -1,0 +1,3 @@
+.*/wp-admin.*
+.*/wp-admin.*
+.*/wp-admin.*

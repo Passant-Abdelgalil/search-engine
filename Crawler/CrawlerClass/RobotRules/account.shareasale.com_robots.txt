@@ -1,0 +1,12 @@
+.*/r.cfm.*
+.*/u.cfm.*
+.*/m-pr.cfm.*
+.*/m-redirect.cfm.*
+.*/m-s.cfm.*
+.*/m-formredirect.cfm.*
+.*/offlinenotice.xml.*
+.*/w.cfm.*
+.*/v.cfm.*
+.*/t.cfm.*
+.*/choice/index.cfm.*
+.*/choice/cd/index.cfm.*
