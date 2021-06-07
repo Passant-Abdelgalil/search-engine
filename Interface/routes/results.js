@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const Word = require('../models/Word');
 const Word_Frequency = require('../models/Word_Frequency');
+var stemmer = require('porter-stemmer').stemmer;
 
 router.get('/:theWord/:NoPage', async(req, res) => {
 
-    var word="";
+    var word=""; 
     var arrFreqWords=[];
 
     try {
@@ -80,7 +81,9 @@ router.get('/:theWord/:NoPage', async(req, res) => {
 
 router.post('/', async(req, res) => {
 
-    res.redirect('/results/' + req.body.wordName +'/' + 0);
+    var stemed_word=stemmer(req.body.wordName);
+    console.log("stemiiinnng: "+stemed_word);
+    res.redirect('/results/' + stemed_word +'/' + 0);
 
 
 });

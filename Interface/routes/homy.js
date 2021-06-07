@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const Word = require('../models/Word');
+var stemmer = require('porter-stemmer').stemmer;
+
 
 router.get('/', async(req, res) => {
 
@@ -12,7 +14,9 @@ router.get('/', async(req, res) => {
 router.post('/', async(req, res) => {
     
     console.log("req.body.wordName: ",req.body.wordName);
-    res.redirect('/results/' + req.body.wordName +'/'+ 0);
+    var stemed_word=stemmer(req.body.wordName);
+    console.log("stemiiinnng: "+stemed_word);
+    res.redirect('/results/' + stemed_word +'/'+ 0);
 });
 
 module.exports = router; 

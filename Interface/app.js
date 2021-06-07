@@ -5,9 +5,11 @@ const app = express();
 const Word = require('./models/Word');
 const bodyParser = require('body-parser');
 const Word_Frequency = require('./models/Word_Frequency');
+var stemmer = require('porter-stemmer').stemmer;
 
-const port = 7080; 
+const port = 8080; 
 
+// console.log(stemmer('travelled'));
 
 mongoose.connect('mongodb://localhost/APT_course', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -36,15 +38,31 @@ app.get('/', async(req, res) => {
   
 
     // let newWord =  new Word({
-    //     Word: "REEM",   
-    //     pages:[{title:"REEM1"},{title:"REEM2"},{title:"REEM3"},
-    //     {title:"REEM4"},{title:"REEM5"},{title:"REEM5"},
-    //     {title:"REEM7"},{title:"REEM8"},{title:"REEM9"},
-    //     {title:"REEM10"},{title:"REEM12"},{title:"REEM13"},
-    //     {title:"REEM11"},{title:"REEM14"},{title:"REEM15"},
-    //     {title:"REEM16"},{title:"REEM20"},{title:"REEM19"},
-    //     {title:"REEM17"},{title:"REEM24"},{title:"REEM21"},
-    //     {title:"REEM18"},{title:"REEM23"},{title:"REEM22"}
+    //     Word: "strange",   
+    //     pages:[{title:"strange1", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange2", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange3", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange4", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " }
+    //     ,{title:"strange5", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange6", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange7", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange8", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange9", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange10", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange11", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange12", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange13", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange14", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange15", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange16", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange17", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange18", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange19", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange20", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange21", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange22", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange23", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " },
+    //     {title:"strange24", URL:"https://dictionary.cambridge.org/dictionary/english/strange", Sentance:"unfamiliar sense 1 strange surroundings " }
     // ]
     // });
     // newWord = await newWord.save();
@@ -60,7 +78,6 @@ app.get('/', async(req, res) => {
     //     db.close();
     //   });
 
-      
     
     return res.render('homy', {
         css: 'style'
