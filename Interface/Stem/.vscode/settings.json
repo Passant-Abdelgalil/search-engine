@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "org.apache.lucene.core-3.5.0.jar"
-    ]
-}
