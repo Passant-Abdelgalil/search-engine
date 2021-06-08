@@ -64,19 +64,20 @@ and test it by search for one word
 ## Crawler
 
 ### Folder Structure
+
+```
 Crawler
 └── CrawlerClass
-    └── src
-    |   └── BFSNeighboursList.java
+    ├── src
+    |   ├── BFSNeighboursList.java
     |   ├── Crawler.java
     |   ├── FileFilling.java
     |   ├── RobotChecker.java
     |   ├── URINormalizer.java
     |   ├── WebCrawler.java
     |   └── Main.java
-    | 
     └── urlsFile.txt
-    
+``` 
 ### Run
 * From Terminal (if Ubuntu):
 NOTE: make sure to be inside the repo directory
