@@ -78,10 +78,18 @@ Crawler
     └── urlsFile.txt
     
 ### Run
-* From Terminal:
+* From Terminal (if Ubuntu):
 NOTE: make sure to be inside the repo directory
 run following commands 
 * `cd cd Crawler/CrawlerClass/src`
 * `javac -cp jsoup-1.13.1.jar *.java`
 * `java -cp ".:./jsoup-1.13.1.jar" Main`
+This will start the crawler, you should see some debug messages to show the crawler state
+
+* From Terminal (if Windows):
+NOTE: make sure to be inside the repo directory
+run following commands 
+* `cd cd Crawler/CrawlerClass/src`
+* `javac -cp jsoup-1.13.1.jar *.java`
+* `java -cp ".;./jsoup-1.13.1.jar" Main`
 This will start the crawler, you should see some debug messages to show the crawler state
