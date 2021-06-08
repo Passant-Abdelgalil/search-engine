@@ -66,8 +66,7 @@ and test it by search for one word
 ### Folder Structure
 
 ```
-Crawler
-└── CrawlerClass
+Crawler 
     ├── src
     |   ├── BFSNeighboursList.java
     |   ├── Crawler.java
@@ -75,8 +74,9 @@ Crawler
     |   ├── RobotChecker.java
     |   ├── URINormalizer.java
     |   ├── WebCrawler.java
-    |   └── Main.java
-    └── urlsFile.txt
+    |   ├── Main.java
+    |   └── urlsFile.txt (empty one for new run)
+    └── urlsFile.txt (the one with 5000 links)
 ``` 
 ### Run
 * From Terminal (if Ubuntu):
