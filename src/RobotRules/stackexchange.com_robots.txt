@@ -1,0 +1,17 @@
+.*/feeds.*
+.*/users/login.*
+.*/users/chat-login.*
+.*/users/logout.*
+.*/users/authenticate.*
+.*/users/flair.*
+.*/api.*
+.*/.*/ivc/.*.*
+.*/.*?.*
+.*/leagues/.*/week/.*/20.*
+.*/leagues/.*/month/.*/20.*
+.*/leagues/.*/quarter/.*/20.*
+.*/leagues/.*/year/.*/20.*
+.*/leagues/.*/alltime/.*/20.*
+.*/filters/.*/.*.*
+.*/search.*
+.*/search?.*
