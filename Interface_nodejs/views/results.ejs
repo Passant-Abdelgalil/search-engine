@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title><%= title %></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+   -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel='stylesheet' href='/css/results.css' />
+  
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+ </head>
+ <body >
+    
+<div class="container" style="width:900px; margin-top:50px;">
+   <h1 align="left" >RAPR Search Engine</h1>
+ 
+   
+   <form action="/results" method="post">
+
+    <% if(word) {%>
+        <div align="left" class="input-group mb-3">
+        <div class="ui-widget">
+            <label for="search"></label>
+            <input type="text" name="wordName" id="search" placeholder="<%=word.Word%>" class="form-control" aria-label="Search RAPR" aria-describedby="icon" />
+        </div>
+            <button type="submit" class="input-group-text" id="icon"><img src="https://img.icons8.com/nolan/25/search.png"/></button>
+        
+        </div>
+        <br /><br />
+        <br /><br />
+   <br /><br />
+        <ul class="list-group" id="result">  
+            <% var i=NoPage * 10;  %>    
+            <% while (i<(NoPage * 10)+10 && i < pages.length) {%>
+                <div>
+                    <li>
+                        <p><%=pages[i].URL%></p>
+                        <a href="<%=pages[i].URL%>"><h2><%= pages[i].title %></h2></a>
+                        <% for (var j=0; j < pages[i].Sentance.length; j++) {%>
+                            <p><%= pages[i].Sentance[j] %></p>
+                        <% } %>
+                    </li>
+                </div>
+                <br />
+            <% i++; } %>
+        
+        </ul>
+</div>
+   <div class="footer">
+    <table>
+        <tr>
+        <% for(var y=0; y<Math.ceil((pages.length/10)); y++)  { %>
+            
+            <th><h1><a href="/results/<%=word.Word%>/<%=y%>"><%=y+1%></a></h1></th>
+        <% } %>
+        </tr>
+    </table>
+   </div>
+   <% } else{ %>
+    <div align="left" class="input-group mb-3">
+      <div class="ui-widget">
+          <label for="search"></label>
+          <input type="text" name="wordName" id="search" placeholder="Search Bar" class="form-control" aria-label="Search RAPR" aria-describedby="icon" />
+      </div>
+          <button type="submit" class="input-group-text" id="icon"><img src="https://img.icons8.com/nolan/25/search.png"/></button>
+      
+      </div>
+      <br /><br />
+      <br /><br />
+   <br /><br />
+      <h1>Oopps! Your word is not found, Search again</h1>
+    <% }%>
+
+</form>
+ </body>
+</html>
+
+<script>
+  $( function() {
+    
+    $( "#search" ).autocomplete({
+      source: function(req,res){
+        $.ajax({
+          url:"/autocomplete/",
+          // dataType:"jsonp",
+          contentType: 'application/json; charset=utf-8',
+          data: req,
+          // dataType: 'text json',
+          success: function (data) {
+            // console.log(data);
+            res(data);
+          },
+          error: function (xhr,err) {
+            var errorMessage = xhr.status + ': ' + xhr.statusText;
+            // alert('Error - ' + errorMessage);
+            console.log(err.status);
+          }
+        });
+      },
+      
+     minLength:1,
+     select: function (event,ui) {
+      console.log("fine,now what");
+       if(ui.item){
+        $( "#search" ).text(ui.item.label);
+       }
+       console.log("fine,now what");
+     }
+    });
+    
+  } ); 
+  </script>

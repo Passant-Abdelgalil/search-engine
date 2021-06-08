@@ -1,0 +1,46 @@
+body{
+    background-image: url("./17973908.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+}
+#result {
+   
+    position: absolute;
+    width: 100%;
+    max-width:870px;
+    cursor: pointer;
+    overflow-y: auto;
+    max-height: 400px;
+    box-sizing: border-box;
+    z-index: 1001;
+    font-size: 1.5rem;
+   }
+   .link-class:hover{
+    background-color:#f1f1f1;
+   }
+   #search,h2{
+    font-family: 'Lemonada', cursive;
+    font-size: 2rem;
+   }
+   .page{
+       font-size: large;
+       margin-top: 50px;
+   }
+
+   p{
+       display: inline;
+   }
+
+   a.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
+  a.abled{
+  }
+  .con{
+      width: 900px;
+      margin: auto;
+  }
