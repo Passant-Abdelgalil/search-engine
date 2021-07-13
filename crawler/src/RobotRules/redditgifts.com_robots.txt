@@ -1,2 +1,0 @@
-.*/statistics.*
-.*/exchanges/.*/rules-ajax.*
